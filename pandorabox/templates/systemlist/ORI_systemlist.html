@@ -1,0 +1,190 @@
+{% extends "main/main.html" %}
+{% load staticfiles %}
+
+{% block extrahead %}
+
+<style>
+
+body {
+font-size: 110%;
+}
+
+#box {
+  padding: 15px;
+  border-radius: 3px;
+  background: rgb(34,34,34);
+  background: rgba(0,0,0,0.2);
+  margin-top: 20px;
+}
+
+</style>
+{% endblock %}
+
+
+<body>
+{% block content %}
+
+<div id="test" class="container">
+<h4>System List</h4>
+  <div id="box">
+
+<table id="table"
+data-toggle="table"
+data-search="true"
+data-show-toggle="true"
+data-show-columns="true"
+data-show-filter="true"
+data-url="{% url 'sapnodelist' %}">
+>
+
+  <thead>
+           <tr>
+
+                 <th
+                        data-field="SID"
+                        data-halign="center"
+                        data-sortable="true">
+                        SID
+                 </th>
+                 <th
+                        data-field="HOSTNAME"
+                        data-halign="center"
+                        data-sortable="true">
+                        HOSTNAME
+                 </th>
+                 <th
+                        data-field="PROYECT"
+                        data-halign="center"
+                        data-sortable="true">
+                        PROYECT
+                 </th>
+                 <th
+                        data-field="PRODUCT"
+                        data-halign="center"
+                        data-sortable="true">
+                        PRODUCT
+                 </th>
+                 <th
+                        data-field="PRODUCT_V"
+                        data-halign="center"
+                        data-sortable="true">
+                        PRODUCT_V
+                 </th>
+                 <th
+                        data-visible="false"
+                        data-field="PRODUCT_DEF"
+                        data-halign="center"
+                        data-sortable="true">
+                        PRODUCT_DEF
+                 </th>
+                 <th
+                        data-field="CLIENT_ROLE"
+                        data-halign="center"
+                        data-sortable="true">
+                        CLIENT_ROLE
+                 </th>
+                 <th
+                        data-field="OS"
+                        data-halign="center"
+                        data-sortable="true">
+                        OS
+                 </th>                 
+		 <th
+                        data-field="OS_V"
+                        data-halign="center"
+                        data-sortable="true">
+                        OS_V
+                 </th>
+		 <th
+                        data-field="DATABASE"
+                        data-halign="center"
+                        data-sortable="true">
+                        DATABASE
+                 </th>                 
+		 <th
+                        data-field="DATABASE_V"
+                        data-halign="center"
+                        data-sortable="true">
+                        DATABASE_V
+                 </th>
+		 <th
+                        data-visible="false"
+                        data-field="URL"
+                        data-halign="center"
+                        data-sortable="true">
+                        URL
+                 </th>
+		 <th
+                        data-field="IP"
+                        data-halign="center"
+                        data-sortable="true">
+                        IP
+                 </th>
+                 <th
+                        data-field="ASI_RAM"
+                        data-halign="center"
+                        data-sortable="true">
+                        ASI_RAM
+                 </th>
+                 <th
+                        data-field="CPU"
+                        data-halign="center"
+                        data-sortable="true">
+                        CPU
+                 </th>
+                 <th
+                        data-field="ASI_DISK"
+                        data-halign="center"
+                        data-sortable="true">
+                        ASI_DISK
+                 </th>
+                 <th
+                        data-visible="false"
+                        data-field="CREATE_AT"
+                        data-halign="center"
+                        data-sortable="true">
+                        CREATE_AT
+                 </th>
+
+           </tr>
+  </thead>
+
+  <tbody>
+                                        {% for row in todo %}
+            <tr>
+                                <td> {{ row.sid }}</td>
+                                <td> {{ row.hostname }}</a></td>
+                                <td> {{ row.proyect }}</td>
+                                <td> {{ row.product }}</td>
+                                <td> {{ row.product_v }}</td>
+                                <td> {{ row.product_def }}</td>
+                                <td> {{ row.client_role }}</td>
+                                <td> {{ row.os }}</td>
+                                <td> {{ row.os_v }}</td>
+                                <td> {{ row.database }}</td>
+                                <td> {{ row.database_v }}</td>
+                                <td> {{ row.url }}</td>
+                                <td> {{ row.ip }}</td>
+                                <td> {{ row.asi_ram }}</td>
+                                <td> {{ row.cpu }}</td>
+                                <td> {{ row.asi_disk }}</td>
+                                <td> {{ row.created_at }}</td>
+            </tr>
+                                        {% endfor %}
+
+  </tbody>
+
+</table>
+</div>
+</div>
+
+{% endblock %}
+{% block js %}
+<script>
+$.fn.editable.defaults.mode = 'inline';
+$('#username{{project.id}}').editable();
+
+</script>
+{% endblock %}
+
+  </body>

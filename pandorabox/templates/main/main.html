@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+{% load static swampdragon_tags %}
+{% load staticfiles %}
+<html>
+<!-- ================================
+Cabezon
+================================= -->
+  <head>
+{% block head %}
+    <title>CEAMON - main</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="{% static "bower_components/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "bower_components/bootstrap-table/src/bootstrap-table.css" %}" rel="stylesheet">
+    <link href="{% static "main/css/style.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "main/color/default.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "gridstack/dist/gridstack.css" %}" rel="stylesheet">
+    <link href="{% static "bower_components/bootstrap3-editable/css/bootstrap-editable.css" %}" rel="stylesheet">
+    <script src="{% static "main/js/modernizr.custom.js" %}"></script>
+{% endblock %}
+
+{% block extrahead %}
+{% endblock %}
+  </head>
+
+<!-- ================================
+Err body
+================================= -->
+  <body>
+	<div class="menu-area">
+			<div id="dl-menu" class="dl-menuwrapper">
+						<button class="dl-trigger">Open Menu</button>
+						<ul class="dl-menu">
+							<li>
+								<a href={% url 'main' %}>Main</a>
+							</li>
+              
+							<li>
+								<a href="#Monitoring">Monitoring</a>
+								<ul class="dl-submenu">
+									<li><a href="{% url 'overview' %}">overview</a></li>
+
+								</ul>
+							</li>
+							<li><a href="{% url 'systemlist' %}">SystemList</a></li>
+                                                        <li><a href="{% url 'locker' %}">Lock vault</a></li>
+							<li><a href="{% url 'logout' %}">Salir</a></li>
+
+			</div>
+	</div>	
+<!-- ================================
+Mensaje de bienvenida
+================================= -->
+<div id="welcome">
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.get_username }}.</p>
+        <p>Session ID, {{ request.session.session_key }}.</p>
+    {% else %}
+        <p>Welcome, new user. Please log in.</p>
+    {% endif %}
+</div>
+
+<!-- ================================
+Notificaciones inferior derecha
+================================= -->
+
+<!-- ================================
+Widget menu test
+================================= -->
+<div class="btn-group btn-group-xs">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+     Widgets tests<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li id="add_widget_counter"><a href="#">Crear widget counter </a></li>
+    <li id="del_widget_counter"><a href="#">Eliminar widget counter</a></li>
+    <li id="add_widget_last5alerts"><a href="#">Crear widget test</a></li>
+    <li id="del_widget_last5alerts"><a href="#">Eliminar widget test</a></li>
+  </ul>
+</div>
+
+<!-- ================================
+Bloque de contenido MAIN
+================================= -->
+{% block content %}
+
+
+<!-- ================================
+Widgets por defecto
+================================= -->
+
+<div class="grid-stack">
+<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2"><div class="grid-stack-item-content">
+<h4>System counter</h4>
+
+<li> <b>TOTAL SAP instances:</b><b id="instancias_count"></b></li>
+<li> <b>Abap instances:</b><b id="instancias_abap_count"></b></li>
+<li> <b>Portal instances:</b><b id="instancias_portal_count"></b></li>
+<li> <b>Java Engine instances:</b><b id="instancias_javaengine_count"></b></li>
+<li> <b>Opentext instances:</b><b id="instancias_opentext_count"></b></li>
+
+<li> <b>Sistemas en status Danger:</b><b id="danger_count"></b></li>
+<li> <b>Sistemas en status Warning:</b><b id="warning_count"></b></li>
+</div></div>
+
+<!-- ================================
+Version actual del ceamon
+================================= -->
+<div style="position:fixed; margin-left:6px; bottom:0px; color:#FFFFFF"> <p><b>Alpha version 0.3</b></p></div>
+
+<!-- ================================
+FIN ____ Bloque de contenido MAIN
+================================= -->
+{% endblock %}
+<!-- ================================
+Cargamos los JS al final
+================================= -->
+<!-- Jquery -->
+    <script src="{% static "tables/js/jquery-1.11.3.min.js" %}"></script>
+    <script src="{% static "jqueryui/jquery-ui.min.js" %}"></script>
+<!-- Bootstrap -->
+    <script src="{% static "bower_components/bootstrap/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "bower_components/bootstrap-table/src/bootstrap-table.js" %}"></script>
+    <script src="{% static "bower_components/bootstrap-table/src/locale/bootstrap-table-es-SP.js" %}" ></script>
+    <script src="{% static "bower_components/bootstrap-table/src/extensions/editable/bootstrap-table-editable.js" %}" ></script>
+    <script src="{% static "bower_components/bootstrap3-editable/js/bootstrap-editable.js" %}" ></script>
+<!-- Varios menu -->
+    <script src="{% static "main/js/jquery.smooth-scroll.min.js" %}"></script>
+    <script src="{% static "main/js/jquery.dlmenu.js" %}"></script>
+    <script src="{% static "main/js/custom.js" %}"></script>
+<!-- Gridstack -->
+    <script src="{% static "gridstack/lodash/lodash.min.js" %}"></script>
+    <script src="{% static "gridstack/src/gridstack.js" %}"></script>
+<!-- Widgets -->
+    <script src="{% static "main/js/widgets.js" %}"></script>
+    <script src="{% static "bower_components/bootstrap3-editable/js/bootstrap-editable.js" %}" ></script>
+    {% swampdragon_settings %}
+<!-- SwampDragon RT -->
+    <script type="text/javascript" src="{% static "swampdragon/js/vendor/sockjs-0.3.4.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "swampdragon/js/dist/swampdragon.js" %}"></script>
+    <script type="text/javascript" src="{% static "swampdragon/js/dist/datamapper.js" %}"></script>
+    <script type="text/javascript" src="{% static "swampdragon/js/legacy/swampdragon-vanilla.js" %}"></script>
+    <script type="text/javascript" src="http://localhost:9999/settings.js"></script>
+
+<!-- Monitor RT -->
+    <script type="text/javascript" src="{% static 'notify/monitor.js' %}"></script>
+
+<!-- ================================
+TESTS
+================================= -->
+
+{% block js %}
+{% endblock %}
+<!-- ================================
+Los scripts aqui
+================================= -->
+<script type="text/javascript">
+
+</script>
+{% block extrascripts %}
+{% endblock %}
+
+</body>
+</html>

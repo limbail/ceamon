@@ -1,0 +1,78 @@
+{% extends "main/main.html" %}
+{% load staticfiles %}
+
+{% block extrahead %}
+
+<style>
+input[type="password"]{
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  outline: none;
+}
+
+#row-password {
+  width: 20%;
+}
+
+body {
+  font-size: 110%;
+}
+
+#box {
+  padding: 15px;
+  border-radius: 3px;
+  background: rgb(34,34,34);
+  background: rgba(0,0,0,0.2);
+  margin-top: 20px;
+
+}
+
+#popinfo.tooltip {
+  position: relative;
+  display: inline;
+  background: rgb(34,34,34);
+  background: rgba(0,0,0,0.2);
+
+}
+
+</style>
+
+{% endblock %}
+
+
+<body>
+{% block content %}
+<div class="container">
+
+<h4>TEST WIDGETS</h4>
+  <div id="box" style="width:500px;">
+     <ul style="list-style-type:none; text-align: left;">
+     <h4 style="text-align:center; top:-20px; position:relative;" data-toggle="tooltip">System Counter</h4>
+     {% load static swampdragon_tags %}
+     <li> <b>Numero de instancias SAP:</b><b id="instancias_count"></b></li>
+     <li> <b>Sistemas en status Danger:</b><b id="danger_count"></b></li>
+     <li> <b>Sistemas en status Warning:</b><b id="warning_count"></b></li>
+     </ul> 
+  </div>
+</div>
+
+{% endblock %}
+{% block js %}
+{% swampdragon_settings %}
+<!-- SwampDragon -->
+<script type="text/javascript" src="{% static "swampdragon/js/vendor/sockjs-0.3.4.min.js" %}"></script>
+<script type="text/javascript" src="{% static "swampdragon/js/dist/swampdragon.js" %}"></script>
+<script type="text/javascript" src="{% static "swampdragon/js/dist/datamapper.js" %}"></script>
+<script type="text/javascript" src="{% static "swampdragon/js/legacy/swampdragon-vanilla.js" %}"></script>
+<script type="text/javascript" src="http://localhost:9999/settings.js"></script>
+
+<!-- Monitor en tiempo real -->
+<script type="text/javascript" src="{% static 'notify/monitor.js' %}"></script>
+
+<script type="text/javascript">
+</script>
+
+{% endblock js %}
+
+  </body>
+

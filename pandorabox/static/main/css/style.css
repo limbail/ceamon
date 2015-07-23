@@ -1,0 +1,73 @@
+/* ================================
+Imports
+================================= */
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,300,700,800);
+@import url('font-awesome.min.css');
+@import url('overwrite.css');
+@import url('dlmenu.css');
+@import url('animate.css');
+
+/* ================================
+General
+================================= */
+body{
+	margin:0%;
+	padding:0%;
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	line-height: 1.6em;
+        font-size: 110%;
+
+background: url('../img/fondo.jpg') no-repeat center center fixed;
+-moz-background-size: cover;
+-webkit-background-size: cover;
+-o-background-size: cover;
+background-size: cover;a
+}
+
+/* ================================
+Cajita transparente
+================================= */
+#box {
+  padding: 15px;
+  border-radius: 3px;
+  background: rgb(34,34,34);
+  background: rgba(0,0,0,0.2);
+  margin-top: 20px;
+}
+
+/* ================================
+Mensaje de bienvenida
+================================= */
+#welcome{
+  position:absolute;
+  top:0;
+  right:1%;
+ }
+
+/* ================================
+Las notificaciones inferior derecha
+================================= */
+#notify{
+  position:fixed;
+  bottom:1%;
+  right:1%;
+
+ }
+
+/* ================================
+Gridstack, cajas con movimiento draggable, fullHD
+================================= */
+.grid-stack {
+  }
+.grid-stack-item-content {
+  text-align: center;
+  background: rgb(34,34,34);
+  background: rgba(0,0,0,0.2);
+  }
+.grid-stack .grid-stack {
+  margin: 0 -10px;
+  background: rgba(255, 255, 255, 0.3);
+  }
+.grid-stack .grid-stack .grid-stack-item-content {
+  }

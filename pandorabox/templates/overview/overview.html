@@ -1,0 +1,128 @@
+{% extends "main/main.html" %}
+{% load staticfiles %}
+
+{% block extrahead %}
+
+<style>
+
+body {
+font-size: 110%;
+}
+
+#box {
+  padding: 15px;
+  border-radius: 3px;
+  background: rgb(34,34,34);
+  background: rgba(0,0,0,0.2);
+  margin-top: 20px;
+
+}
+
+</style>
+{% endblock %}
+
+
+<body>
+{% block content %}
+
+<div class="container">
+<h4>Overview</h4>
+  <div id="box">
+
+<table id="table"
+data-toggle="table"
+data-search="true"
+data-show-toggle="true"
+data-show-columns="true"
+data-url="{% url 'sapnodelist' %}"
+>
+
+  <thead>
+           <tr>
+		 <th
+			data-field="sid"
+			data-halign="center"
+			data-sortable="true">
+			SID
+		 </th>
+		 <th
+                        data-field="hostname"
+			data-halign="center"
+			data-sortable="true">
+			HOSTNAME
+		 </th>
+		 <th
+                        data-field="url"
+			data-halign="center"
+                        data-sortable="true">
+			URL
+		 </th>
+		 <th
+                        data-field="project"
+                        data-halign="center"
+                        data-sortable="true">
+			PROJECT
+		 </th>
+		 <th
+                        data-field="client_role"
+                        data-halign="center"
+                        data-sortable="true">
+			CLIENT ROLE
+		 </th>
+                 <th
+                        data-cell-style="CellStyle"
+                        data-field="status"
+                        data-halign="center"
+                        data-sortable="true">
+                        STATUS
+                 </th>
+           </tr>
+  </thead>
+
+</table>
+  </div>
+</div>
+
+					{% block js %}
+
+<script>
+$.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+
+$('#username').editable({
+    type: 'text',
+    title: 'Enter username',
+    success: function(response, newValue) {
+        userModel.set('username', newValue); //update backbone model
+    }
+});
+
+function CellStyle(value, row, index) {
+   var celda = row['status'];
+   switch(celda) {
+       case 'SUCCESS':
+           return { classes: 'success'}
+           break;
+       case 'WARNING':
+           return { classes: 'warning'}
+           break;
+       case 'DANGER':
+           return { classes: 'danger'}
+           break;
+       case 'INFO':
+           return { classes: 'info'}
+           break;
+       case 'N/A':
+           return { classes: 'default'}
+           break;
+          
+       default:
+           return { classes: 'default'}
+   }
+};
+
+</script>
+                                        {% endblock %}
+
+{% endblock %}
+
+  </body>

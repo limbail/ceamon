@@ -1,0 +1,178 @@
+{% extends "main/main.html" %}
+{% load staticfiles %}
+
+{% block extrahead %}
+
+<style>
+
+body {
+font-size: 110%;
+}
+
+#box {
+  padding: 15px;
+  border-radius: 3px;
+  background: rgb(34,34,34);
+  background: rgba(0,0,0,0.2);
+  margin-top: 20px;
+}
+
+</style>
+{% endblock %}
+
+
+<body>
+{% block content %}
+
+<div id="test" class="container">
+<h4>System List</h4>
+  <div id="box">
+
+<table id="table"
+data-toggle="table"
+data-search="true"
+data-show-refresh="true"
+data-show-toggle="true"
+data-show-columns="true"
+data-show-filter="true"
+data-url="{% url 'sapnodelist' %}"
+data-pagination="true"
+data-page-list="[5, 10, 20, 50, 100, 200, 500]"
+>
+
+  <thead>
+           <tr>
+
+                 <th
+                        data-field="sid"
+                        data-halign="center"
+                        data-sortable="true">
+                        SID
+                 </th>
+                 <th
+                        data-field="hostname"
+                        data-halign="center"
+                        data-sortable="true">
+                        HOSTNAME
+                 </th>
+                 <th
+                        data-field="project"
+                        data-halign="center"
+                        data-sortable="true">
+                        PROJECT
+                 </th>
+                 <th
+                        data-field="product"
+                        data-halign="center"
+                        data-sortable="true">
+                        PRODUCT
+                 </th>
+                 <th
+                        data-visible="false"
+                        data-field="product_v"
+                        data-halign="center"
+                        data-sortable="true">
+                        PRODUCT_V
+                 </th>
+                 <th
+                        data-field="sap_kernel"
+                        data-halign="center"
+                        data-sortable="true">
+                        SAP KERNEL
+                 </th>
+                 <th
+                        data-visible="false"
+                        data-field="product_def"
+                        data-halign="center"
+                        data-sortable="true">
+                        PRODUCT_DEF
+                 </th>
+                 <th
+                        data-visible="false"
+                        data-field="client_role"
+                        data-halign="center"
+                        data-sortable="true">
+                        CLIENT_ROLE
+                 </th>
+                 <th
+                        data-field="os"
+                        data-halign="center"
+                        data-sortable="true">
+                        OS
+                 </th>
+                 <th
+                        data-field="os_v"
+                        data-halign="center"
+                        data-sortable="true">
+                        OS_V
+                 </th>
+                 <th
+                        data-field="database"
+                        data-halign="center"
+                        data-sortable="true">
+                        DATABASE
+                 </th>
+                 <th
+                        data-field="database_v"
+                        data-halign="center"
+                        data-sortable="true">
+                        DATABASE_V
+                 </th>
+                 <th
+                        data-visible="false"
+                        data-field="url"
+                        data-halign="center"
+                        data-sortable="true">
+                        URL
+                 </th>
+                 <th
+                        data-visible="false"
+                        data-field="ip"
+                        data-halign="center"
+                        data-sortable="true">
+                        IP
+                 </th>
+                 <th
+                        data-field="asi_ram"
+                        data-halign="center"
+                        data-sortable="true">
+                        RAM_GB
+                 </th>
+                 <th
+                        data-field="cpu"
+                        data-halign="center"
+                        data-sortable="true">
+                        CPU_Num.
+                 </th>
+                 <th
+                        data-field="asi_disk"
+                        data-halign="center"
+                        data-sortable="true">
+                        DISK_GB
+                 </th>
+                 <th
+                        data-visible="false"
+                        data-field="create_at"
+                        data-halign="center"
+                        data-sortable="true">
+                        CREATE_AT
+                 </th>
+
+           </tr>
+  </thead>
+
+
+</table>
+</div>
+</div>
+
+{% endblock %}
+{% block js %}
+<script>
+$.fn.editable.defaults.mode = 'inline';
+$('#username{{project.id}}').editable();
+
+</script>
+{% endblock %}
+
+  </body>

@@ -1,0 +1,35 @@
+=================================
+ Alpha version 0.3 - 15/07/2015 <-> 20/07/2015
+=================================
+# 22/07/2015 - mcea
+Now, disable server in admin (Moni active?) is working when ceamon_worker is launched
+
+# 21/07/2015 - mcea
+Mark to (not editable) autoupdate fields, hidden fields in admin 
+
+# 20/07/2015 - mcea
+Add active_moni and remote_mon_active to models.
+Copy function improved, (message error and success)
+
+# 16/07/2015 - mcea
+Add copy function (action) in admin (ceamon admin), this copy server and change "hostname" and "sid" to "N/A" in new object
+
+# 15/07/2015 - mcea
+Adjust in models and add help_text
+Some Adjust on tables for performance load
+
+Security:
+Authentication API add to serializers objects via json
+service user create only for load data into json, not access granted to whole site
+
+=================================
+ Alpha version 0.2 - Initial Commit - mcea
+=================================
+Base APP is done
+RL ( Realtime ) done
+Static widgets done
+Templates done
+Database models done
+Serialization done
+...and so much stuff...
+

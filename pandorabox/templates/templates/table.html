@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+{% include "main/main.html" %}
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+{% block extrahead %}
+    <link href="{% static "bower_components/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "bower_components/bootstrap-table/src/bootstrap-table.css" %}" rel="stylesheet">
+<style>
+
+body {
+font-size: 110%;
+}
+
+#box {
+  padding: 15px;
+  border-radius: 3px;
+  background: rgb(34,34,34);
+  background: rgba(0,0,0,0.2);
+  margin-top: 20px;
+
+}
+
+</style>
+
+{% endblock %}
+</head>
+
+<body>
+{% block content %}
+
+<div class="container">
+  <div id="box">
+
+<table id="table"
+data-toggle="table"
+data-search="true"
+data-show-toggle="true"
+data-show-columns="true"
+>
+
+  <thead>
+           <tr>
+		 <th
+			data-field="SID"
+			data-halign="center"
+			data-sortable="true">
+			SID
+		 </th>
+		 <th
+                        data-field="HOSTNAME"
+			data-halign="center"
+			data-sortable="true">
+			HOSTNAME
+		 </th>
+		 <th
+                        data-field="URL"
+			data-halign="center"
+                        data-sortable="true">
+			URL
+		 </th>
+		 <th
+                        data-field="PROYECT"
+                        data-halign="center"
+                        data-sortable="true">
+			PROYECT
+		 </th>
+		 <th
+                        data-field="CLIENT ROLE"
+                        data-halign="center"
+                        data-sortable="true">
+			CLIENT ROLE
+		 </th>
+	 	 <th
+                        data-field="PRODUCTO"
+                        data-halign="center"
+                        data-sortable="true">
+			PRODUCTO
+	   	 </th>
+		 <th
+                        data-field="PRODUCT V."
+                        data-halign="center"
+                        data-sortable="true">
+			PRODUCT V.
+		 </th>
+		 <th
+                        data-field="PRODUCT DEF."
+			data-halign="center"
+                        data-sortable="true">
+			PRODUCT DEF.
+		 </th>
+		 <th
+                        data-field="CREATE AT."
+                        data-halign="center"
+			data-sortable="true">
+			CREATE AT.
+		 </th>
+           </tr>
+  </thead>
+
+  <tbody>
+                                        {% for row in todo %}
+            <tr>
+                                <td> {{ row.sid }}</td>
+                                <td> {{ row.hostname }}</td>
+                                <td> {{ row.url }}</td>
+                                <td> {{ row.proyect }}</td>
+                                <td> {{ row.client_role }}</td>
+                                <td> {{ row.product }}</td>
+                                <td> {{ row.product_v }}</td>
+                                <td> {{ row.product_def }}</td>
+                                <td> {{ row.created_at }}</td>
+            </tr>
+                                        {% endfor %}
+
+  </tbody>
+
+</table>
+
+
+  </div>
+
+  <div id="box" style="float:right">
+	<h> PRUEBA SEGUNDO DIV </h>
+  </div>
+
+</div>
+
+
+{% endblock %}
+
+
+    <script src="{% static "tables/js/jquery-1.11.3.min.js" %}"></script>
+    <script src="{% static "bower_components/bootstrap/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "bower_components/bootstrap-table/src/bootstrap-table.js" %}"></script>
+    <script src="{% static "bower_components/bootstrap-table/src/locale/bootstrap-table-es-SP.js" %}" ></script>
+
+  </body>
+</html>
+

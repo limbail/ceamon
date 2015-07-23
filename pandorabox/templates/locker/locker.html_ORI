@@ -1,0 +1,130 @@
+{% extends "main/main.html" %}
+{% load staticfiles %}
+
+{% block extrahead %}
+
+<style>
+input[type="password"]{
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  outline: none;
+}
+
+#row-password {
+  width: 20%;
+}
+
+body {
+  font-size: 110%;
+}
+
+#box {
+  padding: 15px;
+  border-radius: 3px;
+  background: rgb(34,34,34);
+  background: rgba(0,0,0,0.2);
+  margin-top: 20px;
+
+}
+
+</style>
+{% endblock %}
+
+
+<body>
+{% block content %}
+<div class="container">
+
+<h4>Lock vault</h4>
+
+  <div id="box">
+<table id="table"
+data-toggle="table"
+data-search="true"
+data-show-toggle="true"
+data-show-columns="true"
+>
+
+  <thead>
+           <tr>
+		 <th
+			data-field="TITLE"
+			data-halign="center"
+			data-sortable="true">
+		        TITLE	
+		 </th>
+		 <th
+                        data-field="USERNAME"
+			data-halign="center"
+			data-sortable="true">
+			USERNAME
+		 </th>
+		 <th
+                        data-field="PASSWORD"
+			data-halign="center"
+                        data-sortable="true">
+			PASSWORD
+		 </th>
+		 <th
+                        data-field="URL"
+                        data-halign="center"
+                        data-sortable="true">
+		        URL	
+		 </th>
+		 <th
+                        data-field="NOTES"
+                        data-halign="center"
+                        data-sortable="true">
+			NOTES
+		 </th>
+           </tr>
+  </thead>
+
+  <tbody>
+
+                                        {% for row in todo %}
+            <tr>
+         <td> {{ row.title }}</td>
+         <td> {{ row.username }}</td>
+         <td id="password">
+             <div class="showpass""> OCULTO </div>
+             <div class="hidepass" style="display:none;">{{ row.password }}</div>
+         </td>
+         <td> {{ row.url }}</td>
+         <td> {{ row.notes }}</td>
+
+            </tr>
+                                        {% endfor %}
+
+
+  </tbody>
+
+</table>
+
+  </div>
+
+  <div id="box" style="float:right">
+  </div>
+
+</div>
+
+{% endblock %}
+{% block js %}
+<script>
+jQuery(function() {
+    jQuery('table td[id=password]').hover(function() {
+        jQuery(this).find("div.hidepass").show();
+        jQuery(this).find("div.showpass").hide();
+
+    }, function() {
+        jQuery(this).find("div.hidepass").hide();
+        jQuery(this).find("div.showpass").show();
+
+    });
+});
+</script>
+
+
+{% endblock %}
+
+  </body>

@@ -1,0 +1,31 @@
+{% load static swampdragon_tags %}
+<!DOCTYPE html>
+
+<html ng-app="TodoApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1>Notifications demo</h1>
+
+<!-- This is our list of notifications -->
+<ul id="notifications">
+    {% for notification in object_list %}
+    <li>{{ notification.message }}</li>
+    {% endfor %}
+</ul>
+
+
+{% swampdragon_settings %}
+<!-- SwampDragon -->
+<script type="text/javascript" src="{{ STATIC_URL }}swampdragon/js/vendor/sockjs-0.3.4.min.js"></script>
+<script type="text/javascript" src="{% static 'swampdragon/js/dist/swampdragon.min.js' %}"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}swampdragon/js/dist/datamapper.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}swampdragon/js/legacy/swampdragon-vanilla.js "></script>
+
+<!-- notifications -->
+<script type="text/javascript" src="{{ STATIC_URL }}notify.js"></script>
+</body>
+</html>

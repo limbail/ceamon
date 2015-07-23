@@ -1,0 +1,38 @@
+{% extends "main/main.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div id="box">
+    <h1 class="page-header">Lock Vault</h1>
+    <table class="table table-striped" class="table table-hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>User name</th>
+            <th>Password</th>
+            <th>Notas</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for row in todo %}
+        <tr>
+            <td>{% if locker %}
+                <a href="{{ locker }}" target="_blank">
+                    {{ row.title }}
+                </a>
+                {% else %}
+                    {{ row.title }}
+                {% endif %}
+            </td>
+            <td>{{ row.username }}</td>
+            <td>{{ row.password }}</td>
+            <td>{{ row.notes }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

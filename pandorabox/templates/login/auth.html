@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<!-- ================================
+Cargamos staticos
+================================= -->
+{% load staticfiles %}
+<!-- ================================
+Cabezon
+================================= -->
+<head>
+
+  <meta charset="UTF-8">
+  <title>CEAMON - Login</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'login/css/login.css' %}" />
+
+</head>
+
+<!-- ================================
+body
+================================= -->
+<body>
+
+  <div class="login-card">
+    <h1></h1><br>
+        {{ state }}
+  <form action "/login/" method="post">
+  {% csrf_token %}
+  {% if next %}
+  <input type="hidden" name="next" value="{{ next }}" />
+  {% endif %}
+
+    <input type="text" name="username" value="{{ username}}" placeholder="Username">
+    <input type="password" name="password" value="" placeholder="Password">
+    <input type="submit" name="login" class="login login-submit" value="login">
+  </form>
+
+  <div class="login-help">
+    <a href="#">Registrarse</a> • <a href="#">Cual era mi password?</a>
+  </div>
+</div>
+
+
+</body>
+
+</html>
