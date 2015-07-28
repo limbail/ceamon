@@ -1,6 +1,9 @@
 =================================
- Alpha version 0.3 - 15/07/2015 <-> 20/07/2015
+ Alpha version 0.3 - 15/07/2015 <-> 28/07/2015
 =================================
+# 28/07/2015 - mcea
+ceamon_worker is now  multiprocesing ceamon/management/commands/m_ceamon_worker.py (default 4 process)
+
 # 22/07/2015 - mcea
 Now, disable server in admin (Moni active?) is working when ceamon_worker is launched
 

@@ -1,4 +1,14 @@
+import django.contrib.admin.widgets
 from django.db import models as m
+
+class ProjectsModel(m.Model):
+    projects = m.CharField(max_length=254,
+    verbose_name='Projects',
+    help_text="You can add projects to ceamon",
+        default='N/A')
+
+    def __unicode__(self):
+        return self.projects
 
 class CommandModel(m.Model):
     status = (
@@ -55,11 +65,6 @@ class sapnode(m.Model):
         default='No',
     )
 
-    project = (
-        ('PROJECT1', 'Project1'),
-        ('PROJECT2', 'Project2'),
-    )
-
     product = (
         ('ABAP', 'Abap'),
         ('PORTAL', 'Portal'),
@@ -93,11 +98,7 @@ class sapnode(m.Model):
         ('CI', 'CI'),
     )
 
-    project = m.CharField(max_length=256,
-            choices=project,
-            help_text="Project related to this server",
-            default='Project1')
-
+    project = m.ManyToManyField(ProjectsModel)
     product = m.CharField(max_length=256,
             choices=product,
             help_text="Product related to this server",
@@ -138,5 +139,3 @@ class sapnode(m.Model):
 
     def __unicode__(self):
         return u'%s ---- %s' % (self.sid, self.hostname)
-
-

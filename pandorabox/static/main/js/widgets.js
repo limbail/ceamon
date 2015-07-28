@@ -14,8 +14,8 @@ var max_widget = 1; // maximo numero de widgets
 var x = 0; // numero inicial de widgets
 
 $(document.body).on('click','#add_widget_counter', function () {
-    var el = $.parseHTML("<div><div class=\"grid-stack-item-content\"/>\
-<li><b></b></li>\
+    var el = $.parseHTML("<div id=widget_counter><div class=\"grid-stack-item-content\"/>\
+    primer_widget\
 <div/>");
     var grid = $('.grid-stack').data('gridstack');
     if(x < max_widget){ // Si x es menor que
@@ -40,7 +40,7 @@ var max_widget01 = 1; // maximo numero de widgets
 var x01 = 0; // numero inicial de widgets
 $('#add_widget_last5alerts').click(function(){
     var el = $.parseHTML("<div id=widget_last5alerts><div class=\"grid-stack-item-content\"/>\
-    segundowidget\
+    segundo_widget\
     <div/>");
     var grid = $('.grid-stack').data('gridstack');
     if(x01 < max_widget01){ // Si x es menor que
@@ -57,5 +57,3 @@ $('#del_widget_last5alerts').click(function(){
     grid.remove_widget(ele01);
     x01--; // eliminamos del contador
 });
-
-

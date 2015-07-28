@@ -12,12 +12,37 @@ Cabezon
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link href="{% static "bower_components/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "bower_components/bootstrap-table/src/bootstrap-table.css" %}" rel="stylesheet">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <link href="{% static "main/css/style.css" %}" rel="stylesheet" media="screen">
     <link href="{% static "main/color/default.css" %}" rel="stylesheet" media="screen">
     <link href="{% static "gridstack/dist/gridstack.css" %}" rel="stylesheet">
     <link href="{% static "bower_components/bootstrap3-editable/css/bootstrap-editable.css" %}" rel="stylesheet">
     <script src="{% static "main/js/modernizr.custom.js" %}"></script>
 {% endblock %}
+
+    <script type="text/javascript">
+      google.load('visualization', '1.0', {'packages':['corechart']});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', {{ instancias_count }});
+        data.addColumn('number', {{ danger_count }});
+        data.addRows([
+          ['Instancias', {{ instancias_count }} ],
+          ['Abap',  {{ danger_count }}  ],
+        ]);
+
+        var options = {'title':'contador:',
+                       'width':250,
+                       'backgroundColor':'transparent',
+                       'height':150};
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
 
 {% block extrahead %}
 {% endblock %}
@@ -84,7 +109,6 @@ Bloque de contenido MAIN
 ================================= -->
 {% block content %}
 
-
 <!-- ================================
 Widgets por defecto
 ================================= -->
@@ -92,7 +116,6 @@ Widgets por defecto
 <div class="grid-stack">
 <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2"><div class="grid-stack-item-content">
 <h4>System counter</h4>
-
 <li> <b>TOTAL SAP instances:</b><b id="instancias_count"></b></li>
 <li> <b>Abap instances:</b><b id="instancias_abap_count"></b></li>
 <li> <b>Portal instances:</b><b id="instancias_portal_count"></b></li>

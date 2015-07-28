@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import ModelForm
 
 class StringListField(forms.CharField):
     def prepare_value(self, value):
@@ -8,3 +9,4 @@ class StringListField(forms.CharField):
         if not value:
             return []
         return [item.strip() for item in value.split(',')]
+

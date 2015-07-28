@@ -11,10 +11,12 @@ from django.db import connection, transaction
 from .scripts.ck_timeout import timeout
 from requests.auth import HTTPBasicAuth
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 ruta_scripts = "/scripts/"
 
 # magia nivel 80:
-proj_path = "/usr/ceamon/pandorabox"
+proj_path = os.path.join(BASE_DIR)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pandorabox.settings")
 sys.path.append(proj_path)
 

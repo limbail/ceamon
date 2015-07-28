@@ -65,7 +65,7 @@ ROOT_URLCONF = 'pandorabox.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/usr/ceamon/pandorabox/templates', 'static'],
+        'DIRS': ['templates', 'static'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,14 +90,14 @@ WSGI_APPLICATION = 'pandorabox.wsgi.application'
 DATABASES = {
         'default': {
                 # El tipo de bbdd que usamos
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         # Nombre de BBDD
         'NAME': 'ceamon',
         # Nuestro usuario y password
         'USER': 'admin',
-        'PASSWORD': '1234',
+        'PASSWORD': 'admin',
         # Localizacion y puerto, en nuestro caso lo dejamos por defecto:
-        'HOST': 'localhost',
+        'HOST': '',
         # Puerto
         'PORT': '',
     }
@@ -123,7 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    "/usr/ceamon/pandorabox/static/",
+os.path.join(BASE_DIR, 'static')
 )
 
 

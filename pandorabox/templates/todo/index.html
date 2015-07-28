@@ -1,7 +1,33 @@
 {% extends "main/main.html" %}
 {% load staticfiles %}
+{% load static swampdragon_tags %}
 
 {% block extrahead %}
+
+ <!--Load the AJAX API-->
+    <script type="text/javascript">
+
+      google.load('visualization', '1.0', {'packages':['corechart']});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', {{ instancias_count }});
+        data.addColumn('number', {{ danger_count }});
+        data.addRows([
+          ['Instancias', {{ instancias_count }} ],
+          ['Abap',  {{ danger_count }}  ],
+        ]);
+
+        var options = {'title':'contador:',
+                       'width':250,
+                       'backgroundColor':'transparent',
+                       'height':150};
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
 
 <style>
 input[type="password"]{
@@ -55,6 +81,12 @@ body {
      </ul> 
   </div>
 </div>
+
+<!-- TESTS -->
+  <div id="box" style="width:500px;">
+<div id="chart_div"></div>
+  </div>
+<!-- TESTS -->
 
 {% endblock %}
 {% block js %}
