@@ -17,7 +17,6 @@ from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
 # Importamos Django modules
-# Importamos Django modules
 from django.core.management.base import BaseCommand, CommandError
 from ceamon.models import sapnode, CommandModel
 from django.core import serializers
@@ -102,7 +101,7 @@ def worker(host,active_moni,sid,product,id):
         pool.terminate()
         pool.join()
 
-if __name__ == '__main__':
+def handler():
     machines = sapnode.objects.filter().order_by().values()
     pool = mp.Pool(4) # numero maximo de procesos creados por el script
     for x in machines:
@@ -111,9 +110,10 @@ if __name__ == '__main__':
         host=x['hostname']
         product=x['product']
         active_moni=x['active_moni'] # (No=desactivado), (Yes=activado)
-
         pool.apply_async(worker, args=(host,active_moni,sid,product,id,)) # Ejecucion asyncrona de los hosts y ejecucion del worker con argumentos
     pool.close()
     pool.join()
 
+if __name__ == '__main__':
+    handler()
 

@@ -11,7 +11,7 @@ for arg in sys.argv:
     pass
 
 #### Variables:
-USER="asdasd"
+USER="shieren"
 
 COMMANDS = '''
 uname -a|awk -F ' ' '{print $1}'

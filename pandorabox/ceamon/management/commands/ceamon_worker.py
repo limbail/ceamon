@@ -28,8 +28,8 @@ application = get_wsgi_application()
 #### script desde aqui:
 
 # Definimos globales
-username = "test01"
-password = "1234?"
+username = "service"
+password = "inicial1"
 url = "http://localhost:9988/sapnode/"
 #id = "1"
 #requests.put(url + id + "/", json={'os': 'prueba'})
@@ -62,6 +62,9 @@ class Command(BaseCommand):
 		e = sapnode.objects.get(id=id)
 		nod = e.command.all().filter().order_by().values()
 
+                e = sapnode.objects.get(id=id)
+                project = e.project.all().filter().order_by().values()
+
                 if active_moni == "Yes":
                     for command in nod:
                         command=command['status']
@@ -87,7 +90,7 @@ class Command(BaseCommand):
                             #p.os = update 
                             #p.save()
 
-                            requests.put(url + str(id) + "/", json={'os': update}, auth=HTTPBasicAuth(username, password)) # Ahora actualilzamos al JSON
+                            requests.put(url + str(id) + "/", json={'os': update, 'project':project}, auth=HTTPBasicAuth(username, password)) # Ahora actualilzamos al JSON
 
                         elif command == "ck_db_version.py":
                             print("El script ha leido ck_db_version.py, y la salida es: ")
