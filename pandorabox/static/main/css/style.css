@@ -36,6 +36,22 @@ Cajita transparente
   margin-top: 20px;
 }
 
+.btn-group-box{
+  left: -10px;
+}
+
+/* ================================
+Widgets menu
+================================= */
+.btn-group-menu-widgets{
+  position:absolute;
+  top:0;
+  right:0%;
+  position: absolute;
+  z-index: 10;
+}
+
+
 /* ================================
 Mensaje de bienvenida
 ================================= */

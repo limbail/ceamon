@@ -24,8 +24,6 @@ $(function () {
     $('.grid-stack').gridstack(options);
 });
 
-//----------------------------------------------------------------------
-//----------------------------------------------------------------------
 
 /***************************************
 // Widget - System Counter
@@ -44,7 +42,7 @@ var widget_counter_node_x = test;
 //$('#tests').append("test");
 }
 
-function do_widget_counter() {
+$(document).on('click','#add_widget_counter', function () {
     // main el
     var el = $.parseHTML("<div id='widget_counter'><div class=\"grid-stack-item-content\"/>\
       <div class='btn-group btn-group-xs pull-right btn-group-box'>\
@@ -86,7 +84,7 @@ function do_widget_counter() {
       Cookies.set('widget_counter_node_y', node.y, { expires: 10 });
       });
    }
-}
+});
 
 // BOTON 01
 $(document).on('click','#opt01', function () {
@@ -106,6 +104,9 @@ el = $('#widget_counter')   // definimos el al objecto
 var node = $(el).data('_gridstack_node');   // recuperamos posicion del objecto
 //$('#tests').append(node.x, node.y, node.height, node.width );
 //Cookies.set('position', {node.x:node.x}, { expires: 14 });
+
+Cookies.set('widget_counter_node_x', node.x, { expires: 10 });
+Cookies.set('widget_counter_node_y', node.y, { expires: 10 });
 }); // Fin - OPT2
 
 // Close button
@@ -123,6 +124,15 @@ $(document).on('click','#del_widget_counter', function () {
     x--; // eliminamos del contador
 }); // Fin - Close button
 
+$( document ).ready(function() {
+var CookieSet = Cookies.get('widget_counter_node_x');
+
+if (CookieSet == null) {
+var widget_counter_node_x = 0;
+$('#tests').append("Cookie No existe, no se recrean los objetos");
+}if (CookieSet != null) {
+$('#tests').append("Cookie SI existe, se procede a recrear los objectos");
+}});
 
 /***************************************
 // Widget - Last Alerts
@@ -149,25 +159,7 @@ $('#del_widget_last5alerts').click(function(){
     x01--; // eliminamos del contador
 });
 
-//----------------------------------------------------------------------
-//----------------------------------------------------------------------
 
-
-//swampdragon ready
 swampdragon.ready(function() {
     swampdragon.subscribe('sys', 'sysinfo', null);
 });
-
-// Inicio de funciones
-$( document ).ready(function() {
-var CookieSet = Cookies.get('widget_counter_node_x');
-
-if (CookieSet == null) {
-var widget_counter_node_x = 0;
-$('#tests').append("Cookie No existe, no se recrean los objetos");
-}if (CookieSet != null) {
-$(document).ready(function() { do_widget_counter() });
-}});
-
-$('#add_widget_counter').on('click', function() { do_widget_counter() });
-

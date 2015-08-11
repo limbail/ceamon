@@ -4,8 +4,9 @@ from django.db import models as m
 class ProjectsModel(m.Model):
     projects = m.CharField(max_length=254,
     verbose_name='Projects',
+    null=True,
     help_text="You can add projects to ceamon",
-        default='N/A')
+    default='N/A')
 
     def __unicode__(self):
         return self.projects
@@ -118,7 +119,6 @@ class sapnode(m.Model):
             default='APP')
 
     product_v = m.CharField(max_length=256, blank=True, default='N/A')
-    #product_def = m.CharField(max_length=256, blank=True, default='N/A', help_text="This server is APP or CI?",)
     database = m.CharField(max_length=256, blank=True, default='N/A')
     database_v = m.CharField(max_length=256, blank=True, default='N/A')
     os = m.CharField(max_length=256, blank=True, default='N/A')

@@ -1,6 +1,11 @@
 =================================
- Alpha version 0.3 - 15/07/2015 <-> 28/07/2015
+ Alpha version 0.3 - 15/07/2015 <-> 11/08/2015
 =================================
+# 11/08/2015 - mcea
+add widget counter (no data visible for now)
+widget position fixed on load webpage and click event
+cookies jquery in widget counter working, browser saved
+
 # 28/07/2015 - mcea
 ceamon_worker is now  multiprocesing ceamon/management/commands/m_ceamon_worker.py (default 4 process)
 

@@ -6,23 +6,25 @@
 
  <!--Load the AJAX API-->
     <script type="text/javascript">
-
       google.load('visualization', '1.0', {'packages':['corechart']});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-
         var data = new google.visualization.DataTable();
-        data.addColumn('string', {{ instancias_count }});
-        data.addColumn('number', {{ danger_count }});
+        data.addColumn('string', 'titulo' );
+        data.addColumn('number', 'valor' );
+
         data.addRows([
-          ['Instancias', {{ instancias_count }} ],
-          ['Abap',  {{ danger_count }}  ],
-        ]);
+          ['Danger',  {{ danger_count }}  ],
+          ['Warning',  {{ warning_count }}  ],
+          ]);
 
         var options = {'title':'contador:',
-                       'width':250,
+                       'width':350,
                        'backgroundColor':'transparent',
-                       'height':150};
+                       'height':350,
+                       'colors': ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
+                       'pieHole': 0.3,
+                       };
 
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
@@ -83,9 +85,9 @@ body {
 </div>
 
 <!-- TESTS -->
-  <div id="box" style="width:500px;">
-<div id="chart_div"></div>
-  </div>
+<div id="box" style="width:500px;">
+    <div id="chart_div"></div>
+</div>
 <!-- TESTS -->
 
 {% endblock %}

@@ -15,7 +15,6 @@ swampdragon.onChannelMessage(function (channels, message) {
     instancias_portal_count.innerText = message.data.instancias_portal_count;
     instancias_javaengine_count.innerText = message.data.instancias_javaengine_count;
     instancias_opentext_count.innerText = message.data.instancias_opentext_count;
-
 });
 
 

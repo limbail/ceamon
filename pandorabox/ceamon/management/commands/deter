@@ -1,3 +1,0 @@
-import multiprocessing
-deter = multiprocessing.cpu_count()
-print deter

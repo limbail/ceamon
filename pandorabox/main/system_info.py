@@ -11,7 +11,7 @@ def broadcast_sys_info():
     global pcb
 
     if pcb is None:
-        pcb = PeriodicCallback(broadcast_sys_info, 5000)
+        pcb = PeriodicCallback(broadcast_sys_info, 3000)
         pcb.start()
 
     danger = sapnode.objects.filter(status='danger').order_by('sid').values().distinct()

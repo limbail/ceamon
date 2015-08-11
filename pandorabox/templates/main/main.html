@@ -3,7 +3,7 @@
 {% load staticfiles %}
 <html>
 <!-- ================================
-Cabezon
+Header
 ================================= -->
   <head>
 {% block head %}
@@ -20,31 +20,33 @@ Cabezon
     <script src="{% static "main/js/modernizr.custom.js" %}"></script>
 {% endblock %}
 
+{% block extrahead %}
+ <!--Load the AJAX API-->
     <script type="text/javascript">
       google.load('visualization', '1.0', {'packages':['corechart']});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-
         var data = new google.visualization.DataTable();
-        data.addColumn('string', {{ instancias_count }});
-        data.addColumn('number', {{ danger_count }});
+        data.addColumn('string', 'titulo' );
+        data.addColumn('number', 'valor' );
+
         data.addRows([
-          ['Instancias', {{ instancias_count }} ],
-          ['Abap',  {{ danger_count }}  ],
-        ]);
+          ['Danger', 450 ],
+          ['Warning', 234 ],
+          ]);
 
         var options = {'title':'contador:',
-                       'width':250,
+                       'width':350,
                        'backgroundColor':'transparent',
-                       'height':150};
+                       'height':350,
+                       'colors': ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
+                       'pieHole': 0.3,
+                       };
 
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
     </script>
-
-
-{% block extrahead %}
 {% endblock %}
   </head>
 
@@ -88,21 +90,10 @@ Mensaje de bienvenida
 <!-- ================================
 Notificaciones inferior derecha
 ================================= -->
-
-<!-- ================================
-Widget menu test
-================================= -->
-<div class="btn-group btn-group-xs">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-     Widgets tests<span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li id="add_widget_counter"><a href="#">Crear widget counter </a></li>
-    <li id="del_widget_counter"><a href="#">Eliminar widget counter</a></li>
-    <li id="add_widget_last5alerts"><a href="#">Crear widget test</a></li>
-    <li id="del_widget_last5alerts"><a href="#">Eliminar widget test</a></li>
-  </ul>
+<div id="box" style="position:fixed; right:0; bottom:0px; color:#FFFFFF">
+<div id="tests"></div>
 </div>
+
 
 <!-- ================================
 Bloque de contenido MAIN
@@ -110,21 +101,36 @@ Bloque de contenido MAIN
 {% block content %}
 
 <!-- ================================
+Widgets menu
+================================= -->
+<div class="btn-group btn-group-xs btn-group-menu-widgets">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+  <span class="glyphicon glyphicon-menu-hamburger"></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right" role="menu">
+    <li id="add_widget_counter"><a href="#">System counter</a></li>
+    <li id="add_widget_last5alerts"><a href="#">Crear widget test</a></li>
+  </ul>
+</div>
+
+<!-- ================================
 Widgets por defecto
 ================================= -->
-
 <div class="grid-stack">
-<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2"><div class="grid-stack-item-content">
+<!--
+<div id="grid01" class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2"><div class="grid-stack-item-content">
 <h4>System counter</h4>
-<li> <b>TOTAL SAP instances:</b><b id="instancias_count"></b></li>
+<li> <b>TOTAL SAP instances:</b><b></b></li>
 <li> <b>Abap instances:</b><b id="instancias_abap_count"></b></li>
 <li> <b>Portal instances:</b><b id="instancias_portal_count"></b></li>
 <li> <b>Java Engine instances:</b><b id="instancias_javaengine_count"></b></li>
 <li> <b>Opentext instances:</b><b id="instancias_opentext_count"></b></li>
-
 <li> <b>Sistemas en status Danger:</b><b id="danger_count"></b></li>
 <li> <b>Sistemas en status Warning:</b><b id="warning_count"></b></li>
-</div></div>
+</div>
+</div>
+-->
+</div>
 
 <!-- ================================
 Version actual del ceamon
@@ -141,6 +147,7 @@ Cargamos los JS al final
 <!-- Jquery -->
     <script src="{% static "tables/js/jquery-1.11.3.min.js" %}"></script>
     <script src="{% static "jqueryui/jquery-ui.min.js" %}"></script>
+    <script src="{% static "jquery_cookie/js-cookie-master/src/js.cookie.js" %}"></script>
 <!-- Bootstrap -->
     <script src="{% static "bower_components/bootstrap/js/bootstrap.min.js" %}"></script>
     <script src="{% static "bower_components/bootstrap-table/src/bootstrap-table.js" %}"></script>
@@ -151,11 +158,12 @@ Cargamos los JS al final
     <script src="{% static "main/js/jquery.smooth-scroll.min.js" %}"></script>
     <script src="{% static "main/js/jquery.dlmenu.js" %}"></script>
     <script src="{% static "main/js/custom.js" %}"></script>
+
 <!-- Gridstack -->
     <script src="{% static "gridstack/lodash/lodash.min.js" %}"></script>
     <script src="{% static "gridstack/src/gridstack.js" %}"></script>
 <!-- Widgets -->
-    <script src="{% static "main/js/widgets.js" %}"></script>
+<!--  <script src="{% static "main/js/widgets.js" %}"></script>  -->
     <script src="{% static "bower_components/bootstrap3-editable/js/bootstrap-editable.js" %}" ></script>
     {% swampdragon_settings %}
 <!-- SwampDragon RT -->
@@ -166,7 +174,8 @@ Cargamos los JS al final
     <script type="text/javascript" src="http://localhost:9999/settings.js"></script>
 
 <!-- Monitor RT -->
-    <script type="text/javascript" src="{% static 'notify/monitor.js' %}"></script>
+    <!-- <script type="text/javascript" src="{% static 'notify/monitor.js' %}"></script> -->
+    <script src="{% static "main/js/widgets.js" %}"></script>
 
 <!-- ================================
 TESTS

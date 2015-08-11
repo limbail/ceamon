@@ -86,11 +86,8 @@ class Command(BaseCommand):
                             print id
                             print("El script ha leido ck_os_version.py, y la salida es: ")
                             print update
-                            #p = sapnode.objects.get(pk=id) # Eliminamos la actualizacion por objeto
-                            #p.os = update 
-                            #p.save()
 
-                            requests.put(url + str(id) + "/", json={'os': update, 'project':project}, auth=HTTPBasicAuth(username, password)) # Ahora actualilzamos al JSON
+                            requests.put(url + str(id) + "/", json={'os': update}, auth=HTTPBasicAuth(username, password))
 
                         elif command == "ck_db_version.py":
                             print("El script ha leido ck_db_version.py, y la salida es: ")

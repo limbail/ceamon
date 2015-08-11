@@ -26,7 +26,7 @@ from requests.auth import HTTPBasicAuth
 
 ruta_scripts = "/commands/scripts/"
 username = "service"
-password = "inicial1"
+password = "initial"
 url = "http://localhost:9988/sapnode/"
 
 def get_script_dir(follow_symlinks=True):
@@ -42,6 +42,7 @@ def worker(host,active_moni,sid,product,id):
     try:
         if active_moni == "Yes":
             e = sapnode.objects.get(id=id)
+            project = e.project.all().filter().order_by().values()
             nod = e.command.all().filter().order_by().values()
             for command in nod:
                 command=command['status']
