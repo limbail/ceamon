@@ -3,8 +3,7 @@ from ceamon.models import sapnode
 from django.contrib.auth.models import User, Group
 
 class sapnodeSerializer(serializers.ModelSerializer):
-    project = serializers.StringRelatedField(many=True)
-
+    project = serializers.StringRelatedField(many=True, required=False)
     class Meta:
         model = sapnode
         fields = ('pk', 'active_moni', 'product', 'project', 'client_role', 'status', 'product_v', 'product_def', 'sap_kernel', 'database', 'database_v', 'os', 'os_v', 'ip', 'cpu', 'asi_disk', 'asi_ram', 'sid', 'hostname', 'url', 'sap_clnt', 'sap_sysn',)

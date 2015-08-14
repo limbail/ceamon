@@ -5,11 +5,12 @@ from requests.auth import HTTPBasicAuth
 username = "service"
 password = "initial"
 url = "http://localhost:9988/sapnode/"
-update = "LINUX"
+update = "ACTUALIZADO"
 
-#r = requests.put(url + str(1) + "/", json={'os': update}, auth=HTTPBasicAuth(username,password))
-#print r.text
+r = requests.put(url + str(1) + "/", json={'os': update}, auth=HTTPBasicAuth(username,password))
+print r.text
 
+"""
 url = urllib.urlopen("http://service:initial@localhost:9988/sapnode/")
 values = json.load(url)
 for x in values:
@@ -17,3 +18,4 @@ for x in values:
         print key, 'is:', value
     print ''
 url.close()
+"""

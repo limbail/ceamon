@@ -3,10 +3,10 @@ from django.db import models as m
 
 class ProjectsModel(m.Model):
     projects = m.CharField(max_length=254,
-    verbose_name='Projects',
-    null=True,
-    help_text="You can add projects to ceamon",
-    default='N/A')
+        verbose_name='Projects',
+        null=True,
+        help_text="You can add projects to ceamon",
+        default='N/A')
 
     def __unicode__(self):
         return self.projects

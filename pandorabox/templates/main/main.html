@@ -21,32 +21,6 @@ Header
 {% endblock %}
 
 {% block extrahead %}
- <!--Load the AJAX API-->
-    <script type="text/javascript">
-      google.load('visualization', '1.0', {'packages':['corechart']});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'titulo' );
-        data.addColumn('number', 'valor' );
-
-        data.addRows([
-          ['Danger', 450 ],
-          ['Warning', 234 ],
-          ]);
-
-        var options = {'title':'contador:',
-                       'width':350,
-                       'backgroundColor':'transparent',
-                       'height':350,
-                       'colors': ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
-                       'pieHole': 0.3,
-                       };
-
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
 {% endblock %}
   </head>
 
@@ -94,6 +68,9 @@ Notificaciones inferior derecha
 <div id="tests"></div>
 </div>
 
+<!-- ================================
+Google Charts
+================================= -->
 
 <!-- ================================
 Bloque de contenido MAIN
@@ -109,7 +86,7 @@ Widgets menu
   </button>
   <ul class="dropdown-menu dropdown-menu-right" role="menu">
     <li id="add_widget_counter"><a href="#">System counter</a></li>
-    <li id="add_widget_last5alerts"><a href="#">Crear widget test</a></li>
+    <li id="add_widget_Alerts"><a href="#">Alerts</a></li>
   </ul>
 </div>
 
@@ -121,12 +98,12 @@ Widgets por defecto
 <div id="grid01" class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2"><div class="grid-stack-item-content">
 <h4>System counter</h4>
 <li> <b>TOTAL SAP instances:</b><b></b></li>
-<li> <b>Abap instances:</b><b id="instancias_abap_count"></b></li>
-<li> <b>Portal instances:</b><b id="instancias_portal_count"></b></li>
-<li> <b>Java Engine instances:</b><b id="instancias_javaengine_count"></b></li>
-<li> <b>Opentext instances:</b><b id="instancias_opentext_count"></b></li>
-<li> <b>Sistemas en status Danger:</b><b id="danger_count"></b></li>
-<li> <b>Sistemas en status Warning:</b><b id="warning_count"></b></li>
+<li> <b>Abap instances:</b><b id="ainstancias_abap_count"></b></li>
+<li> <b>Portal instances:</b><b id="ainstancias_portal_count"></b></li>
+<li> <b>Java Engine instances:</b><b id="ainstancias_javaengine_count"></b></li>
+<li> <b>Opentext instances:</b><b id="ainstancias_opentext_count"></b></li>
+<li> <b>Sistemas en status Danger:</b><b id="adanger_count"></b></li>
+<li> <b>Sistemas en status Warning:</b><b id="awarning_count"></b></li>
 </div>
 </div>
 -->
