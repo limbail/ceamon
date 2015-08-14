@@ -1,4 +1,4 @@
 # ceamon
 Central Enterprise Monitoring
 
-http://i.imgur.com/mEmbwUJ.jpg
+![alt tag](http://i.imgur.com/mEmbwUJ.jpg)
