@@ -34,6 +34,8 @@ Cajita transparente
   background: rgb(34,34,34);
   background: rgba(0,0,0,0.2);
   margin-top: 20px;
+  position: relative;
+  z-index: 10;
 }
 
 .btn-group-box{
@@ -41,10 +43,40 @@ Cajita transparente
 }
 
 /* ================================
+Animacion del icono glyphicon-refresh-animate
+================================= */
+#btn-loading {
+  background-color: transparent;
+  border-style: none;
+  z-index: 10;
+  position: relative;
+}
+
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -ms-animation: spin .7s infinite linear;
+    -webkit-animation: spinw .7s infinite linear;
+    -moz-animation: spinm .7s infinite linear;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+  
+@-webkit-keyframes spinw {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes spinm {
+    from { -moz-transform: rotate(0deg);}
+    to { -moz-transform: rotate(360deg);}
+}
+/* ================================
 Widgets menu
 ================================= */
 .btn-group-menu-widgets{
-  position:absolute;
   top:0;
   right:0%;
   position: absolute;
@@ -68,7 +100,6 @@ Las notificaciones inferior derecha
   position:fixed;
   bottom:1%;
   right:1%;
-
  }
 
 /* ================================
@@ -88,3 +119,21 @@ Gridstack, cajas con movimiento draggable, fullHD
 .grid-stack .grid-stack .grid-stack-item-content {
   }
 
+/* ================================
+widget manager - group form
+================================= */
+#manager-form-group {
+  position: absolute;
+  margin: 0 23px;
+  z-index: 10;
+ }
+
+#manager-form-title {
+}
+
+#manager-form-submit {
+  position: absolute;
+  bottom: 0%
+  right: 0%;
+  z-index: 10;
+}

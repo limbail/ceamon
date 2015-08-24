@@ -29,6 +29,8 @@
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
+
+
     </script>
 
 <style>
@@ -63,6 +65,27 @@ body {
 
 }
 
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -ms-animation: spin .7s infinite linear;
+    -webkit-animation: spinw .7s infinite linear;
+    -moz-animation: spinm .7s infinite linear;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+  
+@-webkit-keyframes spinw {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes spinm {
+    from { -moz-transform: rotate(0deg);}
+    to { -moz-transform: rotate(360deg);}
+}
 </style>
 
 {% endblock %}
@@ -87,6 +110,25 @@ body {
 <!-- TESTS -->
 <div id="box" style="width:500px;">
     <div id="chart_div"></div>
+<button class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></button>
+
+<a data-toggle="modal" href="#example" class="btn btn-primary btn-large">Abrir ventana modal</a>
+
+<div id="example" class="modal hide fade in" style="display: none;">
+    <div class="modal-header">
+        <a data-dismiss="modal" class="close">×</a>
+        <h3>Cabecera de la ventana</h3>
+     </div>
+     <div class="modal-body">
+         <h4>Texto de la ventana</h4>
+        <p>Mas texto en la ventana.</p>                
+    </div>
+    <div class="modal-footer">
+        <a href="index.html" class="btn btn-success">Guardar</a>
+        <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+    </div>
+</div>
+
 </div>
 <!-- TESTS -->
 

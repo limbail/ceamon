@@ -5,10 +5,11 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse_lazy
 from django.template import RequestContext
 
-from .models import locker 
+from .models import *
 from .forms import LockerForm
 
 def LockerView(request):
+    SALT_SIZE = 8
     dic = {}
     dic.update(csrf(request))
 
@@ -23,9 +24,8 @@ def LockerView(request):
             ins.sid = 'SID'
             ins.save()
             return HttpResponseRedirect(reverse('locker', ))
-
     else:
         form = LockerForm()
-    todo = locker.objects.all().order_by('username').values().distinct()
+    todo = locker.objects.all().order_by('title').values().distinct()
     return render_to_response('locker/locker.html',{'todo':todo, 'form':form,},context_instance=RequestContext(request))
 

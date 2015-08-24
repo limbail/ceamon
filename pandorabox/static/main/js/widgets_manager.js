@@ -112,7 +112,6 @@ function do_opt01_01() {
 //$( '#widget_counter' ).append( '<li><b>TOTAL SAP instances:</b> <b id=ainstancias_count></b></li>' );
 //$('<div style="position:relative; left:10px;"></div>').attr('id','chart_div').appendTo('#widget_counter');
 $('#myModal').modal('show')
-$("#myModal .modal-body").text( "Prueba insert to modal" );
 }
 $('#opt01').on('click', function() { do_opt01_01() });
 $('<div style="position:relative; left:10px;"></div>').attr('id','chart_div').appendTo('#widget_counter');
@@ -250,7 +249,7 @@ function do_widget_manager() {
 <form id='manager-form-01' method='POST'>\
   <div class='form-group' id='manager-form-group'>\
   </div>\
-<button type='button' id='manager-form-submit' class='btn btn-default input-sm' data-toggle='modal' data-target='#myModal'>Lock management</button>\
+  <button type='submit' class='btn btn-default input-sm' id='manager-form-submit'>Submit</button>\
 </form>\
 <div/>\
     <div/>");

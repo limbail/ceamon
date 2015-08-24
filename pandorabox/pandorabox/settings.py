@@ -166,9 +166,9 @@ SWAMP_DRAGON_CONNECTION = ('swampdragon.connections.sockjs_connection.DjangoSubs
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-SWAMP_DRAGON_HOST = 'localhost' # default '127.0.0.1'
+SWAMP_DRAGON_HOST = '192.168.1.250' # default '127.0.0.1'
 SWAMP_DRAGON_PORT = '9999' # default '9999'
-DRAGON_URL = 'http://localhost:9999' # default 'http://localhost:9999'
+DRAGON_URL = 'http://192.168.1.250:9999' # default 'http://localhost:9999'
 
 SWAMP_DRAGON_HEARTBEAT_ENABLED = True
 SWAMP_DRAGON_HEARTBEAT_FREQUENCY = 1000 * 60 * 5  # Five minutes

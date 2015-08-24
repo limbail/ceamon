@@ -1,6 +1,9 @@
 =================================
  Alpha version 0.3 - 15/07/2015 <-> 11/08/2015
 =================================
+# 18/08/2015 - mcea
+widget_counter: now chart work and loading span is add to box, now this is updated by RL
+
 # 11/08/2015 - mcea
 add widget counter (no data visible for now)
 widget position fixed on load webpage and click event
