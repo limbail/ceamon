@@ -38,10 +38,6 @@ Cajita transparente
   z-index: 10;
 }
 
-.btn-group-box{
-  left: -10px;
-}
-
 /* ================================
 Animacion del icono glyphicon-refresh-animate
 ================================= */
@@ -83,6 +79,17 @@ Widgets menu
   z-index: 10;
 }
 
+/* ================================
+Widgets buttons
+================================= */
+.btn-group-box{
+  left: -10px;
+}
+
+.btn-default-in-box{
+  background-color: transparent;
+  border: none;
+}
 
 /* ================================
 Mensaje de bienvenida

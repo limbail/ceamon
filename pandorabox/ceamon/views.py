@@ -21,8 +21,8 @@ from django.contrib.auth.models import User, Group
 from ceamon.serializers import UserSerializer, GroupSerializer
 
 # IMPORT 
-from ceamon.serializers import sapnodeSerializer
-from ceamon.models import sapnode
+from ceamon.serializers import sapnodeSerializer, StatusSerializer
+from ceamon.models import sapnode, StatusModel
 
 
 def detail(request, question_id):
@@ -100,3 +100,58 @@ class UserViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+@api_view(['GET', 'POST'])
+def StatusViewSet(request, format=None):
+
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    content = {
+        'user': unicode(request.user),  # `django.contrib.auth.User` instance.
+        'auth': unicode(request.auth),  # None
+    }
+
+    if request.method == 'GET':
+        l_StatusModel = StatusModel.objects.all()
+        serializer = StatusSerializer(l_StatusModel, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = StatusSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE', 'POST'])
+def status_detail(request, pk, format=None):
+
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    try:
+        l_StatusModel = StatusModel.objects.get(pk=pk)
+    except StatusModel.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = StatusSerializer(l_StatusModel)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = StatusSerializer(l_StatusModel, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'POST':
+        serializer = StatusSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        StatusModel.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+

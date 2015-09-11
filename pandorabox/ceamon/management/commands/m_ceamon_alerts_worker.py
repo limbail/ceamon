@@ -66,41 +66,11 @@ def worker(host,active_moni,sid,product,id):
                     print(" El script ha leido ck_os_version.py, y la salida es: ")
                     print update
                     requests.put(url + str(id) + "/", json={'os': update}, auth=HTTPBasicAuth(username, password))
-                elif command == "ck_db_version.py":
+                if command == "ck_ping.py":
                     print(" Procesing in"+ ' ' + sid + ' ' + "in" + ' ' +  host)
-                    print("El script ha leido ck_db_version.py, y la salida es: ")
+                    print(" El script ha leido ck_os_version.py, y la salida es: ")
                     print update
-                    requests.put(url + str(id) + "/", json={'database': update}, auth=HTTPBasicAuth(username, password))
-                elif command == "ck_dbv_version.py":
-                    print(" Procesing in"+ ' ' + sid + ' ' + "in" + ' ' +  host)
-                    print("El script ha leido ck_dbv_version.py, y la salida es: ")
-                    print update
-                    requests.put(url + str(id) + "/", json={'database_v': update}, auth=HTTPBasicAuth(username, password))
-                elif command == "ck_gettotalsizefs.py":
-                    print(" Procesing in"+ ' ' + sid + ' ' + "in" + ' ' +  host)
-                    print("El script ha leido ck_gettotalsizefs.py, y la salida es: ")
-                    print update
-                    requests.put(url + str(id) + "/", json={'asi_disk': update}, auth=HTTPBasicAuth(username, password))
-                elif command == "ck_get_num_cpus.py":
-                    print(" Procesing in"+ ' ' + sid + ' ' + "in" + ' ' +  host)
-                    print("El script ha leido ck_get_num_cpus.py, y la salida es: ")
-                    print update
-                    requests.put(url + str(id) + "/", json={'cpu': update}, auth=HTTPBasicAuth(username, password))
-                elif command == "ck_osv_version.py":
-                    print(" Procesing in"+ ' ' + sid + ' ' + "in" + ' ' +  host)
-                    print("El script ha leido ck_osv_version.py, y la salida es: ")
-                    print update
-                    requests.put(url + str(id) + "/", json={'os_v': update}, auth=HTTPBasicAuth(username, password))
-                elif command == "ck_get_ram.py":
-                    print(" Procesing in"+ ' ' + sid + ' ' + "in" + ' ' +  host)
-                    print("El script ha leido ck_get_ram.py, y la salida es: ")
-                    print update
-                    requests.put(url + str(id) + "/", json={'asi_ram': update}, auth=HTTPBasicAuth(username, password))
-                elif command == "ck_sap_kernel_version.py":
-                    print(" Procesing in"+ ' ' + sid + ' ' + "in" + ' ' +  host)
-                    print("El script ha leido ck_sap_kernel_version.py, y la salida es: ")
-                    print update
-                    requests.put(url + str(id) + "/", json={'sap_kernel': update}, auth=HTTPBasicAuth(username, password))
+                    requests.put(url + str(id) + "/", json={'os': update}, auth=HTTPBasicAuth(username, password))
 
         else:
             print(" Monitoring is disabled for"+ ' ' + sid + ' ' + "in" + ' ' +  host)

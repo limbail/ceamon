@@ -66,6 +66,8 @@ urlpatterns = patterns('',
     url(r'^todo/$', w_problem_View, name='todo'),
     url(r'^sapnode/$', ceamon.views.sapnode_list, name='sapnodelist'),
     url(r'^sapnode/(?P<pk>[0-9]+)/$', ceamon.views.sapnode_detail, name='sapnodedetail'),
+    url(r'^status/$', ceamon.views.StatusViewSet, name='status'),
+    url(r'^status/(?P<pk>[0-9]+)/$', ceamon.views.status_detail, name='statusdetail'),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

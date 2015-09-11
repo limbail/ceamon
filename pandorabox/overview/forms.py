@@ -1,10 +1,9 @@
 from django import forms
-from ceamon.models import sapnode
+from ceamon.models import sapnode, StatusModel
 from django.forms import ModelForm
 
 class OverviewForm(ModelForm):
-
     class Meta:
-        model = sapnode
-        fields = ['hostname','sid']
+        model = StatusModel
+        fields = ['system', 'status_id', 'status', 'comment']
 

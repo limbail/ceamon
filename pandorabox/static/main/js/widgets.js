@@ -57,6 +57,7 @@ var x = 1; // numero inicial de widgets
 var CookieSet = Cookies.get('widget_counter_node_x');
 if (CookieSet == null) {
 var widget_counter_node_x = 0;
+var widget_counter_node_y = 0;
 }
 if (CookieSet != null) {
 var test = Cookies.get('widget_counter_node_x');
@@ -68,10 +69,10 @@ function do_widget_counter() {
     // main el
     var el = $.parseHTML("<div id='widget_counter'><div class=\"grid-stack-item-content\"/>\
       <div class='btn-group btn-group-xs pull-right btn-group-box'>\
-        <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>\
+        <button type='button' class='btn btn-default-in-box dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>\
           <span class='glyphicon glyphicon-cog'></span>\
           </button>\
-        <button id='del_widget_counter' type='button' class='btn btn-default' aria-haspopup='true' aria-expanded='false'>\
+        <button id='del_widget_counter' type='button' class='btn btn-default-in-box' aria-haspopup='true' aria-expanded='false'>\
           <span class='glyphicon glyphicon-remove'></span>\
           </button>\
         <ul class='dropdown-menu'>\
@@ -83,7 +84,7 @@ function do_widget_counter() {
     <div/>");
     var grid = $('.grid-stack').data('gridstack');
     if(x < max_widget){ // Si x es menor que
-    grid.add_widget(el, widget_counter_node_x, 0, 4, 2, false);
+    grid.add_widget(el, widget_counter_node_x, widget_counter_node_y, 4, 2, false);
     grid.resizable('.grid-stack-item', false );
     x++; //add al contador
     $('#add_widget_counter').addClass('hidden');
@@ -158,6 +159,7 @@ var x01 = 1; // numero inicial de widgets
 var CookieSet = Cookies.get('widget_Alerts_node_x');
 if (CookieSet == null) {
 var widget_Alerts_node_x = 0;
+var widget_Alerts_node_y = 0;
 }
 if (CookieSet != null) {
 var test = Cookies.get('widget_Alerts_node_x');
@@ -167,10 +169,10 @@ var widget_Alerts_node_x = test;
 function do_widget_Alerts() {
     var el = $.parseHTML("<div id='widget_Alerts'><div class=\"grid-stack-item-content\"/>\
       <div class='btn-group btn-group-xs pull-right btn-group-box'>\
-        <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>\
+        <button type='button' class='btn btn-default-in-box dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>\
           <span class='glyphicon glyphicon-cog'></span>\
           </button>\
-        <button id='del_widget_Alerts' type='button' class='btn btn-default' aria-haspopup='true' aria-expanded='false'>\
+        <button id='del_widget_Alerts' type='button' class='btn btn-default-in-box' aria-haspopup='true' aria-expanded='false'>\
           <span class='glyphicon glyphicon-remove'></span>\
           </button>\
           </ul>\
@@ -179,7 +181,7 @@ function do_widget_Alerts() {
     <div/>");
     var grid = $('.grid-stack').data('gridstack');
     if(x01 < max_widget){ 
-    grid.add_widget(el, widget_Alerts_node_x, 0, 4, 2, false);
+    grid.add_widget(el, widget_Alerts_node_x, widget_Alerts_node_y, 4, 2, false);
     grid.resizable('.grid-stack-item', false );
     x01++; //add al contador
     $('#add_widget_Alerts').addClass('hidden');
@@ -197,6 +199,12 @@ function do_widget_Alerts() {
       Cookies.set('widget_Alerts_node_x', node.x, { expires: 10 });
       Cookies.set('widget_Alerts_node_y', node.y, { expires: 10 });
       });
+
+setTimeout(function() {
+    var danger_ve = $('#danger_count').html();
+    //$.when($('#widget_Alerts').append($('#danger_count')));
+    $.when($('#widget_Alerts').append("<b>" + danger_ve.innerHTML + "</b>"));
+}, 5000);
 
 } //fin do_widget_alerts
 
@@ -226,6 +234,7 @@ var x02 = 1;
 var CookieSet = Cookies.get('widget_manager_node_x');
 if (CookieSet == null) {
 var widget_manager_node_x = 0;
+var widget_manager_node_y = 0;
 }
 if (CookieSet != null) {
 var test = Cookies.get('widget_manager_node_x');
@@ -235,10 +244,10 @@ var widget_manager_node_x = test;
 function do_widget_manager() {
     var el = $.parseHTML("<div id='widget_manager'><div class=\"grid-stack-item-content\"/>\
       <div class='btn-group btn-group-xs pull-right btn-group-box'>\
-        <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>\
+        <button type='button' class='btn btn-default-in-box dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>\
           <span class='glyphicon glyphicon-cog'></span>\
           </button>\
-        <button id='del_widget_manager' type='button' class='btn btn-default' aria-haspopup='true' aria-expanded='false'>\
+        <button id='del_widget_manager' type='button' class='btn btn-default-in-box' aria-haspopup='true' aria-expanded='false'>\
           <span class='glyphicon glyphicon-remove'></span>\
           </button>\
         <ul class='dropdown-menu'>\
@@ -256,7 +265,7 @@ function do_widget_manager() {
     <div/>");
     var grid = $('.grid-stack').data('gridstack');
     if(x02 < max_widget){ 
-    grid.add_widget(el, widget_manager_node_x, 0, 4, 2, false);
+    grid.add_widget(el, widget_manager_node_x, widget_manager_node_y, 4, 2, false);
     grid.resizable('.grid-stack-item', false );
     x02++;
     $('#add_widget_manager').addClass('hidden');

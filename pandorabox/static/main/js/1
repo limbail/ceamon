@@ -191,6 +191,9 @@ function do_widget_Alerts() {
     Cookies.set('widget_Alerts_node_x', node.x, { expires: 10 });
     Cookies.set('widget_Alerts_node_y', node.y, { expires: 10 });
 
+    var e_Alerts_count = $('#danger_count').html();
+    $('#widget_Alerts').append(e_Alerts_count + "<b id=e_Alerts_count>e_Alerts_count</b>");
+
     $('.grid-stack').on('dragstop', function (event, ui) {
       var grid = this;
       var element = event.target;

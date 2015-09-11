@@ -37,7 +37,6 @@ body {
 <div class="container">
 
 <h4>Lock vault</h4>
-
   <div id="box">
 <table id="table"
 data-toggle="table"
@@ -84,18 +83,15 @@ data-page-list="[10, 25, 50, 100]"
   <tbody>
 
                                         {% for row in todo %}
-
-
             <tr>
          <td> {{ row.title }}</td>
-         <td> {{ row.e_username }}</td>
+         <td> {{ row.username }}</td>
          <td id="password">
              <div class="showpass""> OCULTO </div>
-             <div class="hidepass" style="display:none;">{{ row.e_password }}</div>
+             <div class="hidepass" style="display:none;">{{ row.password }}</div>
          </td>
-         <td> {{ row.e_url }}</td>
-         <td> {{ row.e_notes }}</td>
-
+         <td> {{ row.url }}</td>
+         <td> {{ row.notes }}</td>
             </tr>
 
                                         {% endfor %}

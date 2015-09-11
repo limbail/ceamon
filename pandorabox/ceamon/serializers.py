@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ceamon.models import sapnode
+from ceamon.models import sapnode, StatusModel
 from django.contrib.auth.models import User, Group
 
 class sapnodeSerializer(serializers.ModelSerializer):
@@ -19,4 +19,10 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
         fields = ('url', 'name')
+
+class StatusSerializer(serializers.ModelSerializer):
+    system = serializers.StringRelatedField(required=False)
+    class Meta:
+        model = StatusModel
+        fields = ('system', 'status_id', 'status', 'comment', 'modified',)
 

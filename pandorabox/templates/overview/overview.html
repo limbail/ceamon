@@ -29,53 +29,42 @@ font-size: 110%;
 <h4>Overview</h4>
   <div id="box">
 
+<div id="filter-bar"></div>
 <table id="table"
+data-show-refresh="true"
 data-toggle="table"
-data-search="true"
 data-show-toggle="true"
 data-show-columns="true"
-data-url="{% url 'sapnodelist' %}"
+data-url="{% url 'status' %}"
 >
 
   <thead>
            <tr>
 		 <th
-			data-field="sid"
+			data-field="system"
 			data-halign="center"
 			data-sortable="true">
-			SID
+			System
 		 </th>
 		 <th
-                        data-field="hostname"
+                        data-field="status_id"
 			data-halign="center"
 			data-sortable="true">
-			HOSTNAME
+			Alert Type
 		 </th>
 		 <th
-                        data-field="url"
-			data-halign="center"
-                        data-sortable="true">
-			URL
-		 </th>
-		 <th
-                        data-field="project"
-                        data-halign="center"
-                        data-sortable="true">
-			PROJECT
-		 </th>
-		 <th
-                        data-field="client_role"
-                        data-halign="center"
-                        data-sortable="true">
-			CLIENT ROLE
-		 </th>
-                 <th
                         data-cell-style="CellStyle"
                         data-field="status"
+			data-halign="center"
+                        data-sortable="true">
+			Status
+		 </th>
+		 <th
+                        data-field="comment"
                         data-halign="center"
                         data-sortable="true">
-                        STATUS
-                 </th>
+			Comment
+		 </th>
            </tr>
   </thead>
 
@@ -96,9 +85,10 @@ $('#username').editable({
     }
 });
 
+
 function CellStyle(value, row, index) {
    var celda = row['status'];
-   switch(celda) {
+       switch(celda) {
        case 'SUCCESS':
            return { classes: 'success'}
            break;
@@ -117,8 +107,9 @@ function CellStyle(value, row, index) {
           
        default:
            return { classes: 'default'}
-   }
-};
+       }
+   };
+
 
 </script>
                                         {% endblock %}

@@ -1,7 +1,7 @@
 import django.contrib.admin.widgets
 from django.contrib import admin, messages
 from ceamon import models as m
-from ceamon.models import sapnode, CommandModel, ProjectsModel
+from ceamon.models import sapnode, CommandModel, ProjectsModel, StatusModel
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.admin.widgets import FilteredSelectMultiple
@@ -45,6 +45,9 @@ def copy_server(modeladmin, request, queryset):
 
             for req in sd.command.all(): # tambien copiamos el m2m command
                 sd_copy.command.add(req)
+
+            for req in sd.project.all(): # tambien copiamos el m2m project
+                sd_copy.project.add(req)
 
             for attr_name in [ 'hostname' ]:
                 sd_copy.__dict__.update({attr_name : "N/A"})
@@ -97,9 +100,11 @@ class CommandModelResource(resources.ModelResource):
 
 
 class CommandModelAdmin(ImportExportModelAdmin):
-    list_display = ['status',]
+    list_display = ['check']
     resource_class = CommandModelResource
-    pass
+    fieldsets = [
+        (None, {'fields': ['check']}),
+    ]
 
 
 ####
@@ -129,14 +134,41 @@ class ProjectModelAdmin(ImportExportModelAdmin):
     pass
 
 ####
+#### CHECKS STATUS
+class Status(StatusModel):
+    class Meta:
+        verbose_name_plural = VerboseName(lambda: "Status")
+        proxy=True
+
+# Servers:
+class StatusModelResource(resources.ModelResource):
+    class Meta:
+        model = StatusModel
+
+class StatusModelAdmin(ImportExportModelAdmin):
+    readonly_fields = ['created', 'modified',]
+    list_display = ['system', 'status', 'status_id', 'comment', 'modified',]
+    list_filter = ('status', )
+    resource_class = StatusModelResource
+    fieldsets = (
+        (None, {
+            'fields': ('system', 'status_id', 'status', 'comment', 'created', 'modified', ),
+            'description': "This table will be auto updated"
+        }),
+    )
+
+####
 
 
 #Registros activos:
 #admin.site.register(server_mod, sapnodeadmin)
 #admin.site.register(status_mod, status_admin )
 #admin.site.register(imp_exp_Admin_mod)
+#admin.site.register(ProjectsModel)
+#admin.site.register(status_mod, statusAdmin)
+
 admin.site.register(server, sapnodeAdmin)
 admin.site.register(Command, CommandModelAdmin)
 admin.site.register(Project, ProjectModelAdmin)
-#admin.site.register(ProjectsModel)
-#admin.site.register(status_mod, statusAdmin)
+admin.site.register(Status, StatusModelAdmin)
+

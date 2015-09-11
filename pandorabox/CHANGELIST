@@ -1,6 +1,16 @@
 =================================
- Alpha version 0.3 - 15/07/2015 <-> 11/08/2015
+ Alpha version 0.3 - 15/07/2015 <-> NOW
 =================================
+# 09/09/2015
+Now commands model is updated from fs:
+ceamon/management/commands/scripts/
+ 
+# 28/08/2015 - mcea
+Alert table is created
+
+# 26/08/2015 - mcea
+Locker data is encrypted in database (models)
+
 # 18/08/2015 - mcea
 widget_counter: now chart work and loading span is add to box, now this is updated by RL
 
@@ -10,7 +20,7 @@ widget position fixed on load webpage and click event
 cookies jquery in widget counter working, browser saved
 
 # 28/07/2015 - mcea
-ceamon_worker is now  multiprocesing ceamon/management/commands/m_ceamon_worker.py (default 4 process)
+ceamon_worker is now multiprocesing ceamon/management/commands/m_ceamon_worker.py (default 4 process)
 
 # 22/07/2015 - mcea
 Now, disable server in admin (Moni active?) is working when ceamon_worker is launched

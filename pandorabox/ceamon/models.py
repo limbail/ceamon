@@ -1,5 +1,25 @@
+import os
 import django.contrib.admin.widgets
 from django.db import models as m
+from django.utils import timezone
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+dir = (BASE_DIR + "/ceamon/management/commands/scripts/")
+
+ck_scripts = os.listdir(dir)
+ck_scripts = [x for x in ck_scripts if x.startswith('ck') and x.endswith('py')]
+for x in ck_scripts:
+    check = dict([ (x, x) for x in ck_scripts ])
+check = [(v, k) for k, v in check.iteritems()]
+
+status = (
+    ('N/A', 'N/A'),
+    ('SUCCESS', 'SUCCESS'),
+    ('WARNING', 'WARNING'),
+    ('DANGER', 'DANGER'),
+    ('INFO', 'INFO'),
+)
+
 
 class ProjectsModel(m.Model):
     projects = m.CharField(max_length=254,
@@ -12,29 +32,15 @@ class ProjectsModel(m.Model):
         return self.projects
 
 class CommandModel(m.Model):
-    status = (
-        ('N/A', 'N/A'),
-        ('ck_abap.py', 'ck_abap.py'),
-        ('ck_java.py', 'ck_java.py'),
-        ('ck_webdispatcher.py', 'ck_webdispatcher.py'),
-        ('ck_db_version.py', 'ck_db_version.py'),
-        ('ck_os_version.py', 'ck_os_version.py'),
-        ('ck_gettotalsizefs.py', 'ck_gettotalsizefs.py'),
-        ('ck_get_num_cpus.py', 'ck_get_num_cpus.py'),
-        ('ck_osv_version.py', 'ck_osv_version.py'),
-        ('ck_dbv_version.py', 'ck_dbv_version.py'),
-        ('ck_get_ram.py', 'ck_get_ram.py'),
-        ('ck_sap_kernel_version.py', 'ck_sap_kernel_version.py'),
-    )
-
-    status = m.CharField(max_length=254,
-            choices=status,
+    check = m.CharField(max_length=254,
+            choices=check,
             unique=True,
             null=True,
             default='N/A')
-
+ 
     def __unicode__(self):
-        return u'%s' % (self.status)
+        return u'%s' % (self.check)
+
 
 class sapnode(m.Model):
     class Meta:
@@ -86,14 +92,6 @@ class sapnode(m.Model):
         ('TEMPORAL', 'Temporal'),
     )
 
-    status = (
-        ('N/A', 'N/A'),
-        ('SUCCESS', 'SUCCESS'),
-        ('WARNING', 'WARNING'),
-        ('DANGER', 'DANGER'),
-        ('INFO', 'INFO'),
-    )
-
     product_def = (
         ('APP', 'APP'),
         ('CI', 'CI'),
@@ -138,4 +136,19 @@ class sapnode(m.Model):
     #created_at = m.DateTimeField(null=True, 'Datetime created')
 
     def __unicode__(self):
-        return u'%s ---- %s' % (self.sid, self.hostname)
+        return u'%s' % (self.hostname)
+
+class StatusModel(m.Model):
+    system = m.ForeignKey(sapnode)
+    status_id = m.CharField(max_length=256,
+            choices=check,
+            default='N/A')
+    status = m.CharField(max_length=256,
+            choices=status,
+            default='N/A')
+    comment = m.CharField(max_length=100)
+    created = m.DateTimeField(auto_now_add=True)
+    modified = m.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return u'%s -- %s -- %s -- %s' % (self.system,  self.status_id, self.status, self.comment)
