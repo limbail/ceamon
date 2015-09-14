@@ -12,35 +12,52 @@ for arg in sys.argv:
 
 #### Variables:
 USER="shieren"
-
 COMMANDS = '''
-ping -c 1 localhost
+uname -a
 '''
 
-ssh = subprocess.Popen(["ssh", USER + "@" + '%s' % HOST, COMMANDS],
+def fres():
+    try:
+        ssh = subprocess.Popen(["ssh", USER + "@" + '%s' % HOST, COMMANDS],
                 shell=False,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE)
-res = ssh.stdout.readlines()
+        res = ssh.stdout.readlines()
+        return res
+    except Exception, err:
+        print("CONNECTION PROBLEM")
 
-SYSTEM = res
+SYSTEM = HOST
+STATUS_ID = os.path.basename(__file__)
+MODIFIED = "DATE"
+# STATUS
+if fres():
+    STATUS = "DANGER"
+else:
+    STATUS = "N/A"
+# COMMENT
+if fres():
+    COMMENT = str("Check OK")
+else:
+    COMMENT = "FAIL"
 
 def f(*names):
     r = {}
     for n in names:
         r[[ name for name in globals() if globals()[name] is n ][0]] = n
+    for x in r:
+        x = "'" + x + "'"
     return r
 
 @timeout(5)
 def start_command():
     try:
-        if res:
-            print f(SYSTEM)
-        if not res:
-            print("NO DATA?")
+        if fres:
+            print f(SYSTEM, STATUS_ID, STATUS, COMMENT, MODIFIED)
+        if not fres:
+           print("NO DATA?")
 
     except Exception, err:
         print(traceback.format_exc())
 
 start_command()
-

@@ -101,9 +101,9 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'PUT' , 'POST'])
 def StatusViewSet(request, format=None):
-
+    #l_StatusModel = StatusModel.objects.all(pk=pk)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     content = {
@@ -122,6 +122,14 @@ def StatusViewSet(request, format=None):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'PUT':
+        serializer = StatusSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET', 'PUT', 'DELETE', 'POST'])
 def status_detail(request, pk, format=None):

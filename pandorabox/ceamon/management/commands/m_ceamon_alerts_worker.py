@@ -1,5 +1,5 @@
 #!/usr/bin/python2.7
-import os, time, sys, re, inspect, traceback, time, subprocess, json, requests
+import os, ast, time, sys, re, inspect, traceback, time, subprocess, json, requests
 from threading import Thread
 from subprocess import Popen, PIPE
 import multiprocessing as mp
@@ -35,7 +35,19 @@ user = User.objects.create_user(username='service',
 
 username = "service"
 password = "initial"
-url = "http://localhost:9988/sapnode/"
+url = "http://localhost:9988/status/"
+
+class mydict(dict):
+    def __str__(self):
+        return json.dumps(self)
+
+def f(*names):
+    r = {}
+    for n in names:
+        r[[ name for name in globals() if globals()[name] is n ][0]] = n
+    for x in r:
+        x = "'" + x + "'"
+    return r
 
 def get_script_dir(follow_symlinks=True):
     if getattr(sys, False):
@@ -58,20 +70,19 @@ def worker(host,active_moni,sid,product,id):
                 update = result.communicate()[0] # primer item de la lista
                 update = str(update) # convertimos a str
                 update=update.strip()
-                del_simbolo = [ "['" , "']" ] # No funciona con simbolos especiales
-                update = update.translate(None, ''.join(del_simbolo)) # el join
-                update = update.replace("\\n", "") # simbolo especial x nada
-                if command == "ck_os_version.py":
-                    print(" Procesing in"+ ' ' + sid + ' ' + "in" + ' ' +  host)
-                    print(" El script ha leido ck_os_version.py, y la salida es: ")
-                    print update
-                    requests.put(url + str(id) + "/", json={'os': update}, auth=HTTPBasicAuth(username, password))
-                if command == "ck_ping.py":
-                    print(" Procesing in"+ ' ' + sid + ' ' + "in" + ' ' +  host)
-                    print(" El script ha leido ck_os_version.py, y la salida es: ")
-                    print update
-                    requests.put(url + str(id) + "/", json={'os': update}, auth=HTTPBasicAuth(username, password))
-
+                #del_simbolo = [ "['" , "']" ] # No funciona con simbolos especiales
+                #update = update.translate(None, ''.join(del_simbolo)) # el join
+                #update = update.replace("\\n", "") # simbolo especial x nada
+                if "alerts" in command:
+                    json_out = update.replace("'", "\"") # Mod str
+                    d = json.loads(json_out) #Convertimos a dict
+                    status = d['STATUS']
+                    status_id = d['STATUS_ID']
+                    comment = d['COMMENT']
+                    host = d['HOST']
+                    print status, status_id, comment, host
+                    #{"status": "DANGER", "status_id": "ck_ping.py", "comment": "ssssssssssss", "system": 2}
+                    requests.put(url, json={"status": status, "status_id": status_id, "comment": comment, "system": id}, auth=HTTPBasicAuth(username, password))
         else:
             print(" Monitoring is disabled for"+ ' ' + sid + ' ' + "in" + ' ' +  host)
 
@@ -95,5 +106,4 @@ def handler():
 
 if __name__ == '__main__':
     handler()
-
 

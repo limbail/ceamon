@@ -1,6 +1,9 @@
 =================================
- Alpha version 0.3 - 15/07/2015 <-> NOW
+ Alpha version 0.4 - 15/07/2015 <-> NOW
 =================================
+# 14/09/2015
+Now exist independent py script for alerts
+
 # 09/09/2015
 Now commands model is updated from fs:
 ceamon/management/commands/scripts/
