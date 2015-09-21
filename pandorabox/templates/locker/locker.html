@@ -1,43 +1,24 @@
 {% extends "main/main.html" %}
 {% load staticfiles %}
-
 {% block extrahead %}
-
+<link href="{% static "locker/css/locker.css" %}" rel="stylesheet">
 <style>
-input[type="password"]{
-  background: rgba(0, 0, 0, 0);
-  border: none;
-  outline: none;
-}
-
-#row-password {
-  width: 20%;
-}
-
-body {
-  font-size: 110%;
-}
-
-#box {
-  padding: 15px;
-  border-radius: 3px;
-  background: rgb(34,34,34);
-  background: rgba(0,0,0,0.2);
-  margin-top: 20px;
-
-}
-
 </style>
-
 {% endblock %}
-
 
 <body>
 {% block content %}
 <div class="container">
-
 <h4>Lock vault</h4>
-  <div id="box">
+
+<div id="box">
+	<div class='btn-group btn-group-xs pull-left btn-group-box'>
+        <button type='button' class='btn btn-default-in-box dropdown-toggle' data-toggle='modal' aria-haspopup='true' aria-expanded='false' data-target="#loginModal">
+            <span class='glyphicon glyphicon-plus'></span>
+        </button>
+	</div>
+
+
 <table id="table"
 data-toggle="table"
 data-search="true"
@@ -96,41 +77,57 @@ data-page-list="[10, 25, 50, 100]"
 
                                         {% endfor %}
 
-
   </tbody>
-
 </table>
 </div>
 </div>
 
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Add Locker</h5>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm" name="form" action="" method="post" class="form-horizontal">
+		{% csrf_token %}
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Username</label>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" name="username" />
+                        </div>
+                    </div>
+
+{% for field in form %}
+    <div class="form-group">
+        <div class="col-xs-5">
+        <label class="col-xs-3 control-label">{{ field.label_tag }}</label>
+             {{ field.errors }}
+                        <div class="col-xs-5">
+{{field}}
+                        </div>
+        </div>
+    </div>
+{% endfor %}
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 {% block js %}
-
-<script type="text/javascript">
-
-jQuery(function() {
-    jQuery('table td[id=password]').hover(function() {
-        jQuery(this).find("div.hidepass").show();
-        jQuery(this).find("div.showpass").hide();
-
-    }, function() {
-        jQuery(this).find("div.hidepass").hide();
-        jQuery(this).find("div.showpass").show();
-    });
-    
-    $('#table').on('all.bs.table', function (e, name, args) {
-        jQuery('table td[id=password]').hover(function() {
-        jQuery(this).find("div.hidepass").show();
-        jQuery(this).find("div.showpass").hide();
-
-    }, function() {
-        jQuery(this).find("div.hidepass").hide();
-        jQuery(this).find("div.showpass").show();
-    });
-    });
-});
-
-</script>
+    <script src="{% static "locker/js/locker.js" %}"></script>
 
 {% endblock %}
 

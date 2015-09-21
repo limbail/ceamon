@@ -70,7 +70,7 @@ urlpatterns = patterns('',
     url(r'^status/(?P<pk>[0-9]+)/$', ceamon.views.status_detail, name='statusdetail'),
 )
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns = format_suffix_patterns(urlpatterns,)
 
 urlpatterns += [
     url(r'^sapnode/', include('rest_framework.urls',

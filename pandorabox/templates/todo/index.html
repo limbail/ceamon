@@ -34,6 +34,17 @@
     </script>
 
 <style>
+
+.editable-address {
+    display: block;
+    margin-bottom: 5px;  
+}
+
+.editable-address span {
+    width: 70px;  
+    display: inline-block;
+}
+
 input[type="password"]{
   background: rgba(0, 0, 0, 0);
   border: none;
@@ -90,47 +101,27 @@ body {
 
 {% endblock %}
 
-
 <body>
 {% block content %}
 <div class="container">
 
 <h4>TEST WIDGETS</h4>
-  <div id="box" style="width:500px;">
-     <ul style="list-style-type:none; text-align: left;">
-     <h4 style="text-align:center; top:-20px; position:relative;" data-toggle="tooltip">System Counter</h4>
-     {% load static swampdragon_tags %}
-     <li> <b>Numero de instancias SAP:</b><b id="instancias_count"></b></li>
-     <li> <b>Sistemas en status Danger:</b><b id="danger_count"></b></li>
-     <li> <b>Sistemas en status Warning:</b><b id="warning_count"></b></li>
-     </ul> 
-  </div>
-</div>
 
 <!-- TESTS -->
-<div id="box" style="width:500px;">
-    <div id="chart_div"></div>
-<button class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></button>
-
-<a data-toggle="modal" href="#example" class="btn btn-primary btn-large">Abrir ventana modal</a>
-
-<div id="example" class="modal hide fade in" style="display: none;">
-    <div class="modal-header">
-        <a data-dismiss="modal" class="close">×</a>
-        <h3>Cabecera de la ventana</h3>
-     </div>
-     <div class="modal-body">
-         <h4>Texto de la ventana</h4>
-        <p>Mas texto en la ventana.</p>                
-    </div>
-    <div class="modal-footer">
-        <a href="index.html" class="btn btn-success">Guardar</a>
-        <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
-    </div>
+<div id=box>
+<a href="#" id="address2" data-type="address" data-pk="1" data-title="Please, fill address" class="editable editable-click" data-original-title="" title=""><b>Mosc
+ow</b>, Lenina st., bld. 12</a>
+</div>
+<div id=box>
+<a href="#" id="address2" data-type="address" data-pk="1" data-title="Please, fill address" class="editable editable-click" data-original-title="" title=""><b>Mosc
+ow</b>, Lenina st., bld. 12</a>
+</div>
+<div id=box>
+<a href="#" id="address" data-type="address" data-pk="1" data-title="Please, fill address" class="editable editable-click" data-original-title="" title=""><b>Mosc
+ow</b>, Lenina st., bld. 12</a>
 </div>
 
-</div>
-<!-- TESTS -->
+<!-- FIN TESTS -->
 
 {% endblock %}
 {% block js %}
@@ -144,8 +135,168 @@ body {
 
 <!-- Monitor en tiempo real -->
 <script type="text/javascript" src="{% static 'notify/monitor.js' %}"></script>
-
 <script type="text/javascript">
+</script>
+<script>
+$(function(){
+    $('#address').editable({
+        url: '/post',
+        title: 'Enter city, street and building #',
+        value: {
+            city: "Moscow", 
+            street: "Lenina", 
+            building: "15"
+        }
+    });
+});
+
+(function ($) {
+    "use strict";
+    
+    var Address = function (options) {
+        this.init('address', options, Address.defaults);
+    };
+
+    //inherit from Abstract input
+    $.fn.editableutils.inherit(Address, $.fn.editabletypes.abstractinput);
+
+    $.extend(Address.prototype, {
+        /**
+        Renders input from tpl
+
+        @method render() 
+        **/        
+        render: function() {
+           this.$input = this.$tpl.find('input');
+        },
+        
+        /**
+        Default method to show value in element. Can be overwritten by display option.
+        
+        @method value2html(value, element) 
+        **/
+        value2html: function(value, element) {
+            if(!value) {
+                $(element).empty();
+                return; 
+            }
+            var html = $('<div>').text(value.city).html() + ', ' + $('<div>').text(value.street).html() + ' st., bld. ' + $('<div>').text(value.building).html();
+            $(element).html(html); 
+        },
+        
+        /**
+        Gets value from element's html
+        
+        @method html2value(html) 
+        **/        
+        html2value: function(html) {        
+          /*
+            you may write parsing method to get value by element's html
+            e.g. "Moscow, st. Lenina, bld. 15" => {city: "Moscow", street: "Lenina", building: "15"}
+            but for complex structures it's not recommended.
+            Better set value directly via javascript, e.g. 
+            editable({
+                value: {
+                    city: "Moscow", 
+                    street: "Lenina", 
+                    building: "15"
+                }
+            });
+          */ 
+          return null;  
+        },
+      
+       /**
+        Converts value to string. 
+        It is used in internal comparing (not for sending to server).
+        
+        @method value2str(value)  
+       **/
+       value2str: function(value) {
+           var str = '';
+           if(value) {
+               for(var k in value) {
+                   str = str + k + ':' + value[k] + ';';  
+               }
+           }
+           return str;
+       }, 
+       
+       /*
+        Converts string to value. Used for reading value from 'data-value' attribute.
+        
+        @method str2value(str)  
+       */
+       str2value: function(str) {
+           /*
+           this is mainly for parsing value defined in data-value attribute. 
+           If you will always set value by javascript, no need to overwrite it
+           */
+           return str;
+       },                
+       
+       /**
+        Sets value of input.
+        
+        @method value2input(value) 
+        @param {mixed} value
+       **/         
+       value2input: function(value) {
+           if(!value) {
+             return;
+           }
+           this.$input.filter('[name="city"]').val(value.city);
+           this.$input.filter('[name="street"]').val(value.street);
+           this.$input.filter('[name="building"]').val(value.building);
+       },       
+       
+       /**
+        Returns value of input.
+        
+        @method input2value() 
+       **/          
+       input2value: function() { 
+           return {
+              city: this.$input.filter('[name="city"]').val(), 
+              street: this.$input.filter('[name="street"]').val(), 
+              building: this.$input.filter('[name="building"]').val()
+           };
+       },        
+       
+        /**
+        Activates input: sets focus on the first field.
+        
+        @method activate() 
+       **/        
+       activate: function() {
+            this.$input.filter('[name="city"]').focus();
+       },  
+       
+       /**
+        Attaches handler to submit form in case of 'showbuttons=false' mode
+        
+        @method autosubmit() 
+       **/       
+       autosubmit: function() {
+           this.$input.keydown(function (e) {
+                if (e.which === 13) {
+                    $(this).closest('form').submit();
+                }
+           });
+       }       
+    });
+
+    Address.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
+        tpl: '<div class="editable-address"><label><span>City: </span><input type="text" name="city" class="input-small"></label></div>'+
+             '<div class="editable-address"><label><span>Street: </span><input type="text" name="street" class="input-small"></label></div>'+
+             '<div class="editable-address"><label><span>Building: </span><input type="text" name="building" class="input-mini"></label></div>',
+             
+        inputclass: ''
+    });
+
+    $.fn.editabletypes.address = Address;
+
+}(window.jQuery));
 </script>
 
 {% endblock js %}

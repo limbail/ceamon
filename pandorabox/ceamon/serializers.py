@@ -21,7 +21,8 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'name')
 
 class StatusSerializer(serializers.ModelSerializer):
-    comment = serializers.StringRelatedField(required=False)
+    #comment = serializers.StringRelatedField(required=False)
+    system = serializers.StringRelatedField()
     class Meta:
         model = StatusModel
         fields = ('system', 'status_id', 'status', 'comment',)

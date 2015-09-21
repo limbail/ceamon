@@ -4,7 +4,6 @@
 {% block extrahead %}
 
 <style>
-
 body {
 font-size: 110%;
 }
@@ -28,6 +27,8 @@ font-size: 110%;
 <h4>System List</h4>
   <div id="box">
 
+
+<div id="filter-bar"> </div>
 <table id="table"
 data-toggle="table"
 data-search="true"
@@ -38,6 +39,8 @@ data-show-filter="true"
 data-url="{% url 'sapnodelist' %}"
 data-pagination="true"
 data-page-list="[5, 10, 20, 50, 100, 200, 500]"
+data-toolbar="#filter-bar"
+data-show-filter="true"
 >
 
   <thead>

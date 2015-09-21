@@ -7,7 +7,7 @@ from rest_framework import status, generics, mixins, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from rest_framework import generics
+from rest_framework import generics, filters
 from rest_framework.response import Response
 
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -23,7 +23,6 @@ from ceamon.serializers import UserSerializer, GroupSerializer
 # IMPORT 
 from ceamon.serializers import sapnodeSerializer, StatusSerializer
 from ceamon.models import sapnode, StatusModel
-
 
 def detail(request, question_id):
     return HttpResponse("Estas viendo el server %s." % server_id)
@@ -60,7 +59,7 @@ def sapnode_list(request, format=None):
 
 
 @api_view(['GET', 'PUT', 'DELETE', 'POST'])
-def sapnode_detail(request, pk, format=None):
+def sapnode_detail(request, pk, format=None,):
 
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
@@ -100,6 +99,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
 
 @api_view(['GET', 'PUT' , 'POST'])
 def StatusViewSet(request, format=None):

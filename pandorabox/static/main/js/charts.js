@@ -23,7 +23,7 @@ google.load('visualization', '1.0', {'packages':['corechart']});
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
 
-        var timing = 5000;
+        var timing = 2000;
         setInterval(function() {
           var abap = $('#instancias_abap_count').html();
           data.setValue(0, 1, abap);

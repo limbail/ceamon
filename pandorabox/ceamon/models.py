@@ -146,7 +146,7 @@ class StatusModel(m.Model):
     status = m.CharField(max_length=256,
             choices=status,
             default='N/A')
-    comment = m.CharField(max_length=100)
+    comment = m.CharField(max_length=256, blank=True, default='N/A')
     created = m.DateTimeField(auto_now_add=True)
     modified = m.DateTimeField(auto_now=True)
 

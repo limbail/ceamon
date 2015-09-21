@@ -140,9 +140,16 @@ REST_FRAMEWORK = {
     #'rest_framework.authentication.SessionAuthentication',
     #'rest_framework.permissions.IsAdminUser',
     'rest_framework.permissions.IsAuthenticated',
-
     ]
 }
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    )
+}
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 

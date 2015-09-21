@@ -30,14 +30,13 @@ def fres():
 SYSTEM = HOST
 STATUS_ID = os.path.basename(__file__)
 MODIFIED = "DATE"
-# STATUS
-if fres():
+
+if fres(): # Must be: ( N/A, SUCCESS, WARNING, DANGER, INFO )
     STATUS = "DANGER"
 else:
     STATUS = "N/A"
-# COMMENT
-if fres():
-    COMMENT = str("Check OK")
+if fres(): # You can write anything you want here:
+    COMMENT = "OK"
 else:
     COMMENT = "FAIL"
 
