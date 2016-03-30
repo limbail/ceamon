@@ -1,5 +1,8 @@
 # ceamon
-Central Enterprise Monitoring for Linux, SAP, ETC...
+Central Enterprise Monitoring for SAP.
+
+For SAP monitoring you need a PYRFC and (SAP NetWeaver RFC Library) plugins installed in your system. 
+
 
 Widgets:
 ![alt tag](http://i.imgur.com/mEmbwUJ.jpg)
