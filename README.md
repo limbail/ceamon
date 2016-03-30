@@ -1,7 +1,9 @@
 # ceamon
-Central Enterprise Monitoring for SAP.
+    Central Enterprise Monitoring for SAP.
 
-For SAP monitoring you need a PYRFC and (SAP NetWeaver RFC Library) plugins installed in your system. 
+    For SAP monitoring you need a PYRFC and (SAP NetWeaver RFC Library) plugins installed in your system. 
+    
+    All of this stuff is Alpha atm. Is not secured, so much code need adaptation..., etc. NOT USE THIS if you are not sure what you do.
 
 
 Widgets:
@@ -15,6 +17,7 @@ Overview your alerts planned:
 Find information stored for your systems:
 ![alt tag](http://i.imgur.com/MKC1RiA.jpg)
 Add systems easy and put alerts you need:
+
 ![alt tag](http://i.imgur.com/1dRPgOm.jpg)
 
-All of this stuff is Alpha atm. Is not secured, so much code need adaptation..., etc. NOT USE THIS if you are not sure what you do.
+    All of this stuff is Alpha atm. Is not secured, so much code need adaptation..., etc. NOT USE THIS if you are not sure what you do.
