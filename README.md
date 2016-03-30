@@ -1,5 +1,5 @@
 # ceamon
-Central Enterprise Monitoring
+Central Enterprise Monitoring for Linux, SAP, ETC...
 
 Widgets:
 ![alt tag](http://i.imgur.com/mEmbwUJ.jpg)
