@@ -9,7 +9,9 @@
 Widgets:
 ![alt tag](http://i.imgur.com/mEmbwUJ.jpg)
 Charts if you need info for your system:
+![alt tag](http://i.imgur.com/IBJkTr3.png)
 ![alt tag](http://i.imgur.com/8pXkZPH.jpg)
+![alt tag](http://i.imgur.com/lYuQvHj.png)
 Lock Vault to hide your secrets:
 ![alt tag](http://i.imgur.com/FARJvp3.jpg)
 Overview your alerts planned:
